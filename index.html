@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Night</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="top-bar">
+      <button id="back-button" class="ghost-button" type="button" aria-label="Go back">Back</button>
+      <h1 class="game-title">Movie Night</h1>
+      <div class="top-bar-spacer" aria-hidden="true"></div>
+    </header>
+
+    <main id="app" class="scene-root" aria-live="polite"></main>
+
+    <button id="settings-button" class="settings-button" type="button" aria-label="Open settings">
+      <img src="assets/ui/icon_settings.png" alt="" width="48" height="48">
+    </button>
+
+    <section id="settings-panel" class="settings-panel hidden" aria-hidden="true">
+      <div class="settings-card">
+        <h2>Settings</h2>
+        <button id="resume-button" type="button">Resume</button>
+        <button id="return-home-button" type="button">Return Home</button>
+        <button id="mute-button" type="button">Mute Music: Off</button>
+        <button id="reset-save-button" type="button">Reset Save</button>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
