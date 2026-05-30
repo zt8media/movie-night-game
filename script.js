@@ -23,6 +23,8 @@ const resumeButton = document.querySelector("#resume-button");
 const resumeAppButton = document.querySelector("#resume-app-button");
 const returnHomeButton = document.querySelector("#return-home-button");
 const muteButton = document.querySelector("#mute-button");
+const volumeSlider = document.querySelector("#volume-slider");
+const volumeValue = document.querySelector("#volume-value");
 const resetSaveButton = document.querySelector("#reset-save-button");
 const notesOpenButton = document.querySelector("#notes-open-button");
 const spotifyOpenButton = document.querySelector("#spotify-open-button");
@@ -36,6 +38,7 @@ const phoneNoteContent = document.querySelector("#phone-note-content");
 const spotifyNowPlaying = document.querySelector("#spotify-now-playing");
 const spotifyPlaylist = document.querySelector("#spotify-playlist");
 const orientationOverlay = document.querySelector("#orientation-overlay");
+const bgMusic = document.querySelector("#bg-music");
 
 const notesContent = {
   grocery: {
@@ -120,8 +123,54 @@ const state = {
   selectedSong: "",
 };
 
+function clampVolume(value) {
+  const parsed = Number(value);
+  if (Number.isNaN(parsed)) {
+    return 0.45;
+  }
+  return Math.min(1, Math.max(0, parsed));
+}
+
+state.settings.musicVolume = clampVolume(state.settings.musicVolume);
+
 function setMuteLabel() {
-  muteButton.innerHTML = `<span class="phone-app-icon">🔊</span><span class="phone-app-label">Music: ${state.settings.musicMuted ? "Off" : "On"}</span>`;
+  muteButton.innerHTML = `<span class="phone-app-icon">${state.settings.musicMuted ? "🔇" : "🔊"}</span><span class="phone-app-label">Music: ${state.settings.musicMuted ? "Off" : "On"}</span>`;
+}
+
+function setVolumeLabel() {
+  if (!volumeSlider || !volumeValue) {
+    return;
+  }
+  const volumePercent = Math.round(clampVolume(state.settings.musicVolume) * 100);
+  volumeSlider.value = String(volumePercent);
+  volumeValue.textContent = `${volumePercent}%`;
+}
+
+function tryStartMusic() {
+  if (!bgMusic || state.settings.musicMuted) {
+    return;
+  }
+  bgMusic
+    .play()
+    .catch(() => {
+      // Autoplay can fail until user interaction; safe to ignore.
+    });
+}
+
+function syncMusicState() {
+  if (!bgMusic) {
+    return;
+  }
+
+  bgMusic.volume = clampVolume(state.settings.musicVolume);
+  bgMusic.muted = Boolean(state.settings.musicMuted);
+
+  if (state.settings.musicMuted) {
+    bgMusic.pause();
+    return;
+  }
+
+  tryStartMusic();
 }
 
 function renderPhoneNote() {
@@ -364,6 +413,13 @@ muteButton.addEventListener("click", () => {
   state.settings.musicMuted = !state.settings.musicMuted;
   saveSettings(state.settings);
   setMuteLabel();
+  syncMusicState();
+});
+volumeSlider?.addEventListener("input", () => {
+  state.settings.musicVolume = clampVolume(Number(volumeSlider.value) / 100);
+  saveSettings(state.settings);
+  setVolumeLabel();
+  syncMusicState();
 });
 resetSaveButton.addEventListener("click", () => {
   resetSave();
@@ -373,8 +429,12 @@ resetSaveButton.addEventListener("click", () => {
 });
 
 setMuteLabel();
+setVolumeLabel();
+syncMusicState();
 renderPhoneView();
 updateOrientationGate();
+window.addEventListener("pointerdown", tryStartMusic, { once: true });
+window.addEventListener("keydown", tryStartMusic, { once: true });
 
 window.addEventListener("resize", updateOrientationGate);
 window.addEventListener("orientationchange", updateOrientationGate);

@@ -14,6 +14,37 @@
   --touch-target: 44px;
   --shell-gap: clamp(0.85rem, 2.2vw, 1.4rem);
   --card-radius: clamp(20px, 3vw, 28px);
+  --cat-size: clamp(132px, 17vw, 198px);
+  --home-side-cat-size: clamp(360px, 22vw, 280px);
+  --home-side-cat-right: -4rem;
+  --home-side-cat-bottom: 1.25rem;
+  --home-thought-right: 62%;
+  --home-thought-bottom: 65%;
+  --remote-story-cat-size: clamp(205px, 10vw, 120px);
+  --remote-story-cat-left:-6rem;
+  --remote-story-cat-bottom: -17rem;
+  --remote-hud-cat-size: clamp(230px, 10vw, 120px);
+  --remote-hud-cat-left: 1rem;
+  --remote-hud-cat-bottom: 4.5rem;
+  --login-story-cat-size: clamp(400px, 15vw, 120px);
+  --login-story-cat-left: -12rem;
+  --login-story-cat-bottom: -20rem;
+  --movie-cat-size: clamp(380px, 10vw, 120px);
+  --movie-cat-left: -10rem;
+  --movie-cat-bottom: -14rem;
+  --kitchen-story-cat-size: clamp(266px, 36.8vw, 289px);
+  --kitchen-story-cat-left: -1rem;
+  --kitchen-story-cat-bottom: -20rem;
+  --kitchen-hud-cat-size: clamp(245px, 12.6vw, 139px);
+  --kitchen-hud-cat-left: 35rem;
+  --kitchen-hud-cat-bottom: -5rem;
+  --ending-cat-apology-size: clamp(332px, 17vw, 198px);
+  --ending-cat-apology-x: 0px;
+  --ending-cat-apology-y: 125px;
+  --ending-cat-sleep-size: clamp(332px, 17vw, 198px);
+  --ending-cat-sleep-x: 0px;
+  --ending-cat-sleep-y: 164px;
+  --ending-cat-sleep-scale: 1.04;
 }
 
 * {
@@ -104,6 +135,7 @@ button {
 }
 
 .scene-card {
+  position: relative;
   width: min(100%, 1100px);
   min-height: min(78svh, 820px);
   max-height: calc(100svh - var(--safe-top) - var(--safe-bottom) - 0.8rem);
@@ -158,6 +190,98 @@ button {
   line-height: 1.5;
 }
 
+.home-scene {
+  justify-content: center;
+}
+
+.home-overlay {
+  width: min(100%, 41rem);
+  display: grid;
+  gap: 0.8rem;
+}
+
+.home-side-cat {
+  position: absolute;
+  right: var(--home-side-cat-right);
+  bottom: var(--home-side-cat-bottom);
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.home-side-cat-trigger {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 14px;
+  cursor: pointer;
+  min-width: 0;
+  min-height: 0;
+  line-height: 0;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.home-side-cat-trigger:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: saturate(1.06);
+}
+
+.home-side-cat-trigger:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 4px;
+}
+
+.home-side-cat-image {
+  width: var(--home-side-cat-size);
+  max-width: 100%;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  filter: drop-shadow(0 16px 22px rgba(39, 18, 44, 0.22));
+  transition: opacity 150ms ease, transform 220ms ease;
+}
+
+.home-cat-bounce .home-side-cat-image {
+  animation: home-cat-click-bounce 220ms ease;
+}
+
+@keyframes home-cat-click-bounce {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1.05) rotate(-1.2deg);
+    opacity: 0.94;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.home-thought-bubble {
+  position: absolute;
+  right: var(--home-thought-right);
+  bottom: var(--home-thought-bottom);
+  margin: 0;
+  width: min(42vw, 14rem);
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #3c2f52;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  text-align: center;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.home-side-cat-trigger:hover + .home-thought-bubble {
+  transform: translateY(-1px);
+}
+
 .scene-actions {
   display: flex;
   flex-wrap: wrap;
@@ -195,26 +319,59 @@ button {
 }
 
 .story-characters {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  justify-content: flex-end;
   align-items: end;
   gap: 1rem;
+  min-height: 12rem;
 }
 
-.kitchen-owner-standin {
-  min-height: 14rem;
+.story-characters .owner-standin,
+.story-characters .kitchen-owner-standin {
+  display: none;
 }
 
 .story-cat-art {
-  width: clamp(120px, 16vw, 180px);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  background: rgba(69, 37, 78, 0.68);
-  box-shadow: var(--shadow);
+  width: var(--cat-size);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  filter: drop-shadow(0 18px 24px rgba(39, 18, 44, 0.22));
 }
 
 .story-dialogue-box {
-  min-height: 9rem;
+  width: min(100%, 42rem);
+  min-height: 8.4rem;
+  padding: 1.15rem 1.2rem;
+  border-radius: 26px;
+  background: rgba(255, 248, 246, 0.14);
+  border-color: rgba(255, 235, 229, 0.3);
+  box-shadow:
+    0 18px 40px rgba(42, 17, 44, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
+.story-dialogue-box .dialogue-speaker {
+  margin-bottom: 0.45rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.story-dialogue-box .dialogue-text {
+  font-size: clamp(1.05rem, 2vw, 1.18rem);
+  line-height: 1.68;
+}
+
+.story-dialogue-box .dialogue-controls {
+  justify-content: flex-start;
+}
+
+.story-dialogue-box .dialogue-controls button {
+  min-width: 7.5rem;
+  padding: 0.85rem 1.05rem;
+  background: rgba(255, 250, 248, 0.14);
 }
 
 .cookbook-panel,
@@ -254,6 +411,115 @@ button {
   color: var(--text);
   cursor: pointer;
   text-align: left;
+}
+
+.cookbook-kicker {
+  margin: 0.18rem 0 0.1rem;
+  color: rgba(255, 244, 218, 0.9);
+  font-size: 0.92rem;
+}
+
+.cookbook-choice-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.cookbook-choice-card {
+  min-height: 13rem;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.7rem;
+  padding: 0.72rem;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 245, 236, 0.34);
+  box-shadow: 0 14px 28px rgba(36, 15, 48, 0.22);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.cookbook-choice-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 32px rgba(36, 15, 48, 0.28);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.cookbook-choice-card:focus-visible {
+  outline: 2px solid rgba(255, 235, 199, 0.95);
+  outline-offset: 2px;
+}
+
+.cookbook-choice-image-wrap {
+  display: grid;
+  place-items: center;
+  min-height: 5rem;
+  padding: 0.5rem;
+  border-radius: 14px;
+  background: rgba(255, 250, 244, 0.22);
+}
+
+.cookbook-choice-image-wrap img {
+  width: 100%;
+  max-width: 8.5rem;
+  max-height: 5.2rem;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba(36, 15, 48, 0.22));
+}
+
+.cookbook-choice-copy {
+  display: grid;
+  gap: 0.22rem;
+}
+
+.cookbook-choice-title {
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.cookbook-choice-subtitle {
+  font-size: 0.8rem;
+  color: rgba(255, 245, 227, 0.9);
+}
+
+.cookbook-choice-note {
+  font-size: 0.76rem;
+  color: rgba(248, 238, 228, 0.85);
+  line-height: 1.35;
+}
+
+.cookbook-choice-water .cookbook-choice-image-wrap {
+  background: rgba(197, 233, 255, 0.26);
+}
+
+.cookbook-choice-spaghetti .cookbook-choice-image-wrap {
+  background: rgba(255, 221, 182, 0.24);
+}
+
+.cookbook-recipe-hero {
+  margin: 0.25rem 0 0.7rem;
+  padding: 0.68rem;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 236, 211, 0.32);
+  background: rgba(255, 240, 223, 0.16);
+  display: grid;
+  place-items: center;
+}
+
+.cookbook-recipe-hero img {
+  width: min(100%, 12rem);
+  max-height: 6rem;
+  object-fit: contain;
+  filter: drop-shadow(0 9px 14px rgba(36, 15, 48, 0.24));
+}
+
+@media (max-width: 780px) {
+  .cookbook-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cookbook-choice-card {
+    min-height: 11.2rem;
+  }
 }
 
 .cookbook-ingredients ul {
@@ -304,12 +570,13 @@ button {
 }
 
 .cat-status img {
-  width: clamp(92px, 12vw, 132px);
+  width: var(--cat-size);
   height: auto;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  background: rgba(76, 43, 87, 0.72);
-  box-shadow: var(--shadow);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  filter: drop-shadow(0 18px 24px rgba(39, 18, 44, 0.22));
 }
 
 .kitchen-playfield {
@@ -396,17 +663,22 @@ button {
 }
 
 .ending-cat {
-  width: clamp(120px, 16vw, 180px);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  background: rgba(76, 43, 87, 0.68);
-  box-shadow: var(--shadow);
-  transform: translateY(22px);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  filter: drop-shadow(0 18px 24px rgba(39, 18, 44, 0.24));
   transition: transform 240ms ease;
 }
 
-.ending-cat-centered {
-  transform: translateY(34px) scale(1.04);
+.ending-cat-apology {
+  width: var(--ending-cat-apology-size);
+  transform: translate(var(--ending-cat-apology-x), var(--ending-cat-apology-y));
+}
+
+.ending-cat-sleeping {
+  width: var(--ending-cat-sleep-size);
+  transform: translate(var(--ending-cat-sleep-x), var(--ending-cat-sleep-y)) scale(var(--ending-cat-sleep-scale));
 }
 
 .ending-fade-panel {
@@ -582,13 +854,13 @@ button {
   background: rgba(255, 94, 94, 0.82);
 }
 
-.hotspot-pasta { top: 25%; left: 55%; width: 20.5%; }
-.hotspot-sauce { top: 39%; left: 35%; width: 12%; }
-.hotspot-cheese { top: 29%; left: 130%; width: 14.5%; }
-.hotspot-garlic { top: 47%; left: 110%; width: 3%; }
-.hotspot-sorry { bottom: 3%; left: 80%; width: 15%; }
-.hotspot-cheese-joke { bottom: 7%; left: 148%; width: 25%; }
-.hotspot-mix { bottom: -49%; right: -75%; width: 30%; }
+.hotspot-pasta { top: 25%; left: 57%; width: 26.5%; }
+.hotspot-sauce { top: 42%; left: 35%; width: 12%; }
+.hotspot-cheese { top: 39%; left: 152%; width: 12.5%; }
+.hotspot-garlic { top: 45%; left: 120%; width: -12%; }
+.hotspot-sorry { bottom: 15%; left: 80%; width: 15%; }
+.hotspot-cheese-joke { bottom: 20%; left: 162%; width: 25%; }
+.hotspot-mix { bottom: -39%; right: -35%; width: 30%; }
 .hotspot-spill { bottom: 8%; left: 42%; min-width: 9rem; }
 .hotspot-sponge { bottom: 8%; left: 115%; width: 18%; z-index: 5; touch-action: none; }
 .hotspot-mix { z-index: 5; }
@@ -597,10 +869,10 @@ button {
 .hotspot-wall-art { top: -25%; left: 85%; }
 .hotspot-lamp { top: 39%; left: 152%; }
 .hotspot-rug { bottom: 5%; left: 125%; }
-.hotspot-cat-bed { bottom: -5%; left: 7%; }
+.hotspot-cat-bed { bottom: -1%; left: 7%; }
 .hotspot-table { top: 63%; left: 85%; }
 .hotspot-remote { bottom: 8%; padding-inline: 1rem; background: rgba(255, 209, 102, 0.22); }
-.hotspot-remote-couch { top: 30%; left: 45%; }
+.hotspot-remote-couch { top: 30%; left: 93%; }
 .hotspot-remote-bed { right: 16%; }
 
 .remote-placeholder {
@@ -618,8 +890,8 @@ button {
 
 .remote-placeholder-image {
   position: absolute;
-  top: 40%;
-  left: 65%;
+  top: 50%;
+  left: 62%;
   width: 4rem;
   height: auto;
   filter: drop-shadow(0 12px 18px rgba(46, 23, 48, 0.26));
@@ -701,14 +973,15 @@ button {
   margin: 0 0 0.35rem;
   color: var(--accent);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.92rem;
 }
 
 .dialogue-text {
   margin: 0;
-  line-height: 1.6;
-  font-size: clamp(1rem, 1.8vw, 1.08rem);
+  line-height: 1.68;
+  font-size: clamp(1.03rem, 1.85vw, 1.12rem);
   overflow-wrap: anywhere;
 }
 
@@ -720,12 +993,157 @@ button {
 }
 
 .dialogue-controls button {
-  padding: 0.85rem 1rem;
+  padding: 0.82rem 1rem;
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 249, 246, 0.12);
   color: var(--text);
   cursor: pointer;
+}
+
+.kitchen-scene,
+.remote-scene,
+.login-scene,
+.movie-select-scene {
+  position: relative;
+}
+
+/* Kitchen story cat */
+.kitchen-scene .story-stage {
+  position: relative;
+  padding-bottom: 8rem;
+}
+
+.kitchen-scene .story-characters {
+  position: absolute;
+  left: var(--kitchen-story-cat-left);
+  bottom: var(--kitchen-story-cat-bottom);
+  display: flex;
+  justify-content: flex-start;
+  min-height: 0;
+  z-index: 2;
+}
+
+.kitchen-scene .story-cat-art {
+  width: var(--kitchen-story-cat-size);
+}
+
+/* Kitchen gameplay cat */
+.kitchen-scene .kitchen-hud .cat-status {
+  position: absolute;
+  left: var(--kitchen-hud-cat-left);
+  bottom: var(--kitchen-hud-cat-bottom);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.kitchen-scene .kitchen-hud .cat-status img {
+  width: var(--kitchen-hud-cat-size);
+}
+
+/* Remote story + gameplay cats */
+.remote-scene .story-stage {
+  position: relative;
+  padding-bottom: 8rem;
+}
+
+.remote-scene .story-characters {
+  position: absolute;
+  left: var(--remote-story-cat-left);
+  bottom: var(--remote-story-cat-bottom);
+  display: flex;
+  justify-content: flex-start;
+  min-height: 0;
+  z-index: 2;
+}
+
+.remote-scene .story-cat-art {
+  width: var(--remote-story-cat-size);
+}
+
+.remote-scene .remote-hud .cat-status {
+  position: absolute;
+  left: var(--remote-hud-cat-left);
+  bottom: var(--remote-hud-cat-bottom);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.remote-scene .remote-hud .cat-status img {
+  width: var(--remote-hud-cat-size);
+}
+
+/* Login story cat */
+.login-scene .story-stage {
+  position: relative;
+  padding-bottom: 8rem;
+}
+
+.login-scene .story-characters {
+  position: absolute;
+  left: var(--login-story-cat-left);
+  bottom: var(--login-story-cat-bottom);
+  display: flex;
+  justify-content: flex-start;
+  min-height: 0;
+  z-index: 2;
+}
+
+.login-scene .story-cat-art {
+  width: var(--login-story-cat-size);
+}
+
+/* Movie selection cat */
+.movie-select-scene .movie-select-stage {
+  position: relative;
+  padding-bottom: 8rem;
+}
+
+.movie-select-scene .story-characters {
+  position: absolute;
+  left: var(--movie-cat-left);
+  bottom: var(--movie-cat-bottom);
+  display: flex;
+  justify-content: flex-start;
+  min-height: 0;
+  z-index: 2;
+}
+
+.movie-select-scene .story-cat-art {
+  width: var(--movie-cat-size);
+}
+
+.remote-scene .dialogue-box,
+.login-scene .dialogue-box,
+.movie-select-scene .dialogue-box {
+  padding: 1.08rem 1.18rem;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 247, 0.16), rgba(255, 243, 240, 0.06)),
+    rgba(74, 42, 86, 0.82);
+  border-color: rgba(255, 237, 229, 0.28);
+  box-shadow:
+    0 20px 46px rgba(39, 18, 44, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.remote-scene .dialogue-text,
+.login-scene .dialogue-text,
+.movie-select-scene .dialogue-text {
+  line-height: 1.68;
+  font-size: clamp(1.03rem, 1.85vw, 1.12rem);
+}
+
+.remote-scene .story-dialogue-box,
+.login-scene .story-dialogue-box {
+  background:
+    linear-gradient(180deg, rgba(255, 250, 247, 0.18), rgba(255, 245, 243, 0.08)),
+    rgba(84, 48, 95, 0.72);
+  border-color: rgba(255, 239, 233, 0.34);
+  box-shadow:
+    0 22px 48px rgba(42, 17, 44, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .tv-screen-panel,
@@ -1128,6 +1546,40 @@ button {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.9rem;
   align-content: start;
+}
+
+.phone-volume-card {
+  margin-top: 0.95rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(84, 103, 133, 0.24);
+}
+
+.phone-volume-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.phone-volume-title {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #102036;
+}
+
+.phone-volume-value {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #102036;
+}
+
+.phone-volume-slider {
+  width: 100%;
+  margin-top: 0.55rem;
+  accent-color: #6aa4ff;
 }
 
 .phone-app-button {

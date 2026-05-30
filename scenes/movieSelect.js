@@ -92,6 +92,9 @@ export function createMovieSelectScene() {
       return `
         <section class="scene-card movie-select-scene" style="background-image: linear-gradient(rgba(33, 18, 46, 0.16), rgba(33, 18, 46, 0.54)), url('assets/backgrounds/bg_tv_login.png')">
           <div class="movie-select-stage">
+            <div class="story-characters">
+              <img class="story-cat-art" src="assets/cat/cat_look_right.png" alt="Black cat watching the TV">
+            </div>
             <div class="movie-select-header">
               <p class="panel-label">Movie Selection</p>
               <p>${state.twilightChosen ? "Twilight selected." : state.wrongSelectionClicks > 0 ? `Wrong picks: ${state.wrongSelectionClicks}` : "Pick the movie."}</p>

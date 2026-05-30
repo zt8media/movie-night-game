@@ -175,6 +175,9 @@ function renderCookbookMode(state) {
           <div class="cookbook-page">
             <p class="panel-label">Movie Night Cookbook</p>
             <h2>Regretti Spaghetti (Gluten Free)</h2>
+            <div class="cookbook-recipe-hero">
+              <img src="assets/items/spagetti.png" alt="Regretti Spaghetti">
+            </div>
             <p>A classic movie night meal.</p>
             <p>Usually turns out better than expected.</p>
             <div class="cookbook-ingredients">
@@ -195,9 +198,29 @@ function renderCookbookMode(state) {
           <div class="cookbook-page">
             <p class="panel-label">Movie Night Cookbook</p>
             <h2>Movie Night Cookbook</h2>
-            <div class="cookbook-options">
-              <button type="button" data-kitchen-action="choose-recipe" data-choice="spaghetti">1. Regretti Spaghetti (Gluten Free)</button>
-              <button type="button" data-kitchen-action="choose-recipe" data-choice="water">2. Water</button>
+            <p class="cookbook-kicker">Pick tonight’s culinary destiny.</p>
+            <div class="cookbook-options cookbook-choice-grid">
+              <button type="button" class="cookbook-choice-card cookbook-choice-spaghetti" data-kitchen-action="choose-recipe" data-choice="spaghetti" aria-label="Choose Regretti Spaghetti">
+                <span class="cookbook-choice-image-wrap">
+                  <img src="assets/items/spagetti.png" alt="Regretti Spaghetti">
+                </span>
+                <span class="cookbook-choice-copy">
+                  <span class="cookbook-choice-title">Regretti Spaghetti</span>
+                  <span class="cookbook-choice-subtitle">Gluten Free</span>
+                  <span class="cookbook-choice-note">Comfort food with redemption arc energy.</span>
+                </span>
+              </button>
+
+              <button type="button" class="cookbook-choice-card cookbook-choice-water" data-kitchen-action="choose-recipe" data-choice="water" aria-label="Choose Water">
+                <span class="cookbook-choice-image-wrap">
+                  <img src="assets/items/water.png" alt="Glass of water">
+                </span>
+                <span class="cookbook-choice-copy">
+                  <span class="cookbook-choice-title">Water</span>
+                  <span class="cookbook-choice-subtitle">Technically edible</span>
+                  <span class="cookbook-choice-note">Hydration: yes. Dinner: debatable.</span>
+                </span>
+              </button>
             </div>
           </div>
         `}

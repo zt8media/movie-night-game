@@ -88,17 +88,21 @@ export function createEndingScene() {
 
   return {
     title: "Ending",
-    background: "assets/backgrounds/bg_livingroom.png",
+    background: "assets/backgrounds/bg_livingroom_end.png",
     render() {
       const visibleCard = state.sequenceComplete && !state.cardsComplete && state.cardIndex >= 0
         ? finalCards[state.cardIndex]
         : "";
 
       return `
-        <section class="scene-card ending-scene" style="background-image: linear-gradient(rgba(33, 18, 46, 0.12), rgba(33, 18, 46, 0.48)), url('assets/backgrounds/bg_livingroom.png')">
+        <section class="scene-card ending-scene" style="background-image: linear-gradient(rgba(33, 18, 46, 0.12), rgba(33, 18, 46, 0.48)), url('assets/backgrounds/bg_livingroom_end.png')">
           <div class="ending-stage">
             <div class="ending-characters">
-              <img class="ending-cat ${state.catCentered ? "ending-cat-centered" : ""}" src="assets/cat/${state.catCentered ? "cat_sleep" : "cat_apology"}.png" alt="Black cat curled up on the couch">
+              <img
+                class="ending-cat ${state.catCentered ? "ending-cat-sleeping" : "ending-cat-apology"}"
+                src="assets/cat/${state.catCentered ? "cat_sleep" : "cat_apology"}.png"
+                alt="Black cat on the couch"
+              >
             </div>
           </div>
 

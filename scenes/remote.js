@@ -209,7 +209,7 @@ export function createRemoteScene() {
     background: "assets/backgrounds/bg_home.png",
     render() {
       return `
-        <section class="scene-card kitchen-scene ${state.gameplayStarted ? "kitchen-scene-gameplay" : "kitchen-scene-story"}" style="background-image: linear-gradient(rgba(33, 18, 46, 0.15), rgba(33, 18, 46, 0.48)), url('assets/backgrounds/bg_home.png')">
+        <section class="scene-card kitchen-scene remote-scene ${state.gameplayStarted ? "kitchen-scene-gameplay" : "kitchen-scene-story"}" style="background-image: linear-gradient(rgba(33, 18, 46, 0.15), rgba(33, 18, 46, 0.48)), url('assets/backgrounds/bg_home.png')">
           ${!state.gameplayStarted ? renderStoryMode(state) : renderGameplayMode(state)}
         </section>
       `;
