@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 420" role="img" aria-labelledby="title desc">
+  <title id="title">Remote placeholder</title>
+  <desc id="desc">A simple cartoon TV remote control.</desc>
+  <g transform="translate(16 6) rotate(41 96 194)">
+    <rect x="18" y="10" width="164" height="386" rx="26" fill="#66788c"/>
+    <rect x="25" y="18" width="164" height="386" rx="26" fill="#7b8ea3" opacity=".34"/>
+    <rect x="24" y="18" width="164" height="386" rx="26" fill="none" stroke="#415364" stroke-width="3"/>
+
+    <circle cx="148" cy="52" r="13" fill="#f16767"/>
+    <circle cx="148" cy="52" r="13" fill="none" stroke="#c75252" stroke-width="2"/>
+    <circle cx="182" cy="112" r="13" fill="#51c16a"/>
+    <circle cx="182" cy="112" r="13" fill="none" stroke="#3a9850" stroke-width="2"/>
+
+    <circle cx="122" cy="126" r="44" fill="#4a5b6c"/>
+    <circle cx="122" cy="126" r="44" fill="none" stroke="#3c4b59" stroke-width="3"/>
+    <circle cx="122" cy="126" r="21" fill="#ffd06c"/>
+    <circle cx="122" cy="126" r="21" fill="none" stroke="#e3b14f" stroke-width="2"/>
+
+    <rect x="74" y="126" width="10" height="26" rx="5" fill="#516273"/>
+    <rect x="158" y="126" width="10" height="26" rx="5" fill="#516273"/>
+
+    <g>
+      <rect x="82" y="188" width="18" height="18" rx="4" fill="#f66f73"/>
+      <rect x="106" y="188" width="18" height="18" rx="4" fill="#b6beca"/>
+      <rect x="130" y="188" width="18" height="18" rx="4" fill="#3f95dd"/>
+      <rect x="154" y="188" width="18" height="18" rx="4" fill="#b6beca"/>
+      <rect x="178" y="188" width="18" height="18" rx="4" fill="#ffd267"/>
+    </g>
+
+    <g fill="#b8c1cc" stroke="#8f9baa" stroke-width="1.6">
+      <rect x="72" y="220" width="18" height="18" rx="4"/>
+      <rect x="96" y="220" width="18" height="18" rx="4"/>
+      <rect x="120" y="220" width="18" height="18" rx="4"/>
+      <rect x="144" y="220" width="18" height="18" rx="4"/>
+
+      <rect x="72" y="250" width="18" height="18" rx="4"/>
+      <rect x="96" y="250" width="18" height="18" rx="4"/>
+      <rect x="120" y="250" width="18" height="18" rx="4"/>
+      <rect x="144" y="250" width="18" height="18" rx="4"/>
+
+      <rect x="72" y="280" width="18" height="18" rx="4"/>
+      <rect x="96" y="280" width="18" height="18" rx="4"/>
+      <rect x="120" y="280" width="18" height="18" rx="4"/>
+      <rect x="144" y="280" width="18" height="18" rx="4"/>
+    </g>
+  </g>
+</svg>

@@ -16,17 +16,121 @@
 
     <main id="app" class="scene-root" aria-live="polite"></main>
 
-    <button id="settings-button" class="settings-button" type="button" aria-label="Open settings">
-      <img src="assets/ui/icon_settings.png" alt="" width="48" height="48">
+    <button id="settings-button" class="settings-button phone-launcher" type="button" aria-label="Open phone">
+      <span class="phone-launcher-body" aria-hidden="true">
+        <img class="phone-launcher-icon" src="assets/ui/phone-icon.png" alt="">
+        <span class="phone-launcher-label">Phone</span>
+      </span>
     </button>
 
     <section id="settings-panel" class="settings-panel hidden" aria-hidden="true">
-      <div class="settings-card">
-        <h2>Settings</h2>
-        <button id="resume-button" type="button">Resume</button>
-        <button id="return-home-button" type="button">Return Home</button>
-        <button id="mute-button" type="button">Mute Music: Off</button>
-        <button id="reset-save-button" type="button">Reset Save</button>
+      <div class="phone-popup">
+        <div class="phone-shell">
+          <div class="phone-notch" aria-hidden="true"></div>
+          <div class="phone-statusbar">
+            <span class="phone-status-time">9:41</span>
+            <div class="phone-status-icons" aria-hidden="true">
+              <span class="status-signal"></span>
+              <span class="status-battery"></span>
+            </div>
+          </div>
+
+          <div class="phone-screen">
+            <div class="phone-topbar">
+              <button id="phone-back-button" class="phone-back hidden" type="button">Back</button>
+              <h2 id="phone-title">Phone</h2>
+              <button id="resume-button" class="phone-close" type="button">Close</button>
+            </div>
+
+            <div id="phone-home-view" class="phone-view">
+              <div class="phone-home-header">
+                <p class="phone-home-greeting">Movie Night Tools</p>
+                <p class="phone-home-subtitle">small apps for getting back to the couch</p>
+              </div>
+              <div class="phone-app-grid">
+                <button id="resume-app-button" class="phone-app-button phone-app-resume" type="button">
+                  <span class="phone-app-icon">▶</span>
+                  <span class="phone-app-label">Resume</span>
+                </button>
+                <button id="return-home-button" class="phone-app-button phone-app-home" type="button">
+                  <span class="phone-app-icon">🏠</span>
+                  <span class="phone-app-label">Home</span>
+                </button>
+                <button id="mute-button" class="phone-app-button phone-app-music" type="button">
+                  <span class="phone-app-icon">🔊</span>
+                  <span class="phone-app-label">Music: Off</span>
+                </button>
+                <button id="reset-save-button" class="phone-app-button phone-app-reset" type="button">
+                  <span class="phone-app-icon">↻</span>
+                  <span class="phone-app-label">Reset Save</span>
+                </button>
+                <button id="notes-open-button" class="phone-app-button phone-app-notes" type="button">
+                  <span class="phone-app-icon">📝</span>
+                  <span class="phone-app-label">Notes</span>
+                </button>
+                <button id="spotify-open-button" class="phone-app-button phone-app-playlist" type="button">
+                  <span class="phone-app-icon">♫</span>
+                  <span class="phone-app-label">Playlist</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="phone-notes-view" class="phone-view hidden">
+              <div class="notes-app-shell">
+                <div class="notes-app-header">
+                  <p class="notes-app-kicker">Movie Night Notes</p>
+                  <h3 id="phone-note-title">Grocery List</h3>
+                </div>
+                <div class="phone-body notes-phone-body">
+                  <aside class="notes-sidebar">
+                    <button type="button" data-phone-note="grocery">
+                      <strong>Grocery List</strong>
+                      <span>Dinner supplies and snacks</span>
+                    </button>
+                    <button type="button" data-phone-note="movies">
+                      <strong>Movies To Watch</strong>
+                      <span>A very opinionated queue</span>
+                    </button>
+                    <button type="button" data-phone-note="passwords">
+                      <strong>Passwords</strong>
+                      <span>Absolutely secure, surely</span>
+                    </button>
+                  </aside>
+                  <article class="note-detail">
+                    <div class="note-paper">
+                      <div id="phone-note-content"></div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+
+            <div id="phone-spotify-view" class="phone-view hidden">
+              <div class="spotify-panel">
+                <div class="spotify-header">
+                  <p class="panel-label">Playlist</p>
+                  <h3>Movie Night Mix</h3>
+                  <p>songs for making it back to the couch</p>
+                </div>
+                <div class="spotify-now-playing" id="spotify-now-playing">Now pretending to play: nothing yet</div>
+                <ol id="spotify-playlist" class="spotify-playlist"></ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone-home-indicator" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="orientation-overlay" class="orientation-overlay hidden" aria-hidden="true">
+      <div class="orientation-card">
+        <div class="rotate-icon" aria-hidden="true">
+          <span class="rotate-phone"></span>
+          <span class="rotate-arrow">↻</span>
+        </div>
+        <h2>Movie Night is best experienced in landscape mode.</h2>
+        <p>Please rotate your device.</p>
       </div>
     </section>
   </div>
