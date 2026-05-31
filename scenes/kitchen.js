@@ -270,7 +270,7 @@ function renderGameplayMode(state) {
         action: "ingredient",
         item: "pasta",
         label: "Pasta Box",
-        image: "assets/items/pasta.png",
+        image: "assets/items/pasta.svg",
         alt: "Pasta box",
       })}
       ${renderKitchenHotspot({
@@ -278,7 +278,7 @@ function renderGameplayMode(state) {
         action: "ingredient",
         item: "sauce",
         label: "Sauce Jar",
-        image: "assets/items/sauce.png",
+        image: "assets/items/sauce.svg",
         alt: "Sauce jar",
       })}
       ${renderKitchenHotspot({
@@ -286,7 +286,7 @@ function renderGameplayMode(state) {
         action: "ingredient",
         item: "cheese",
         label: "Cheese Drawer",
-        image: "assets/items/cheese.png",
+        image: "assets/items/cheese.svg",
         alt: "Cheese item",
       })}
       ${renderKitchenHotspot({
@@ -294,7 +294,7 @@ function renderGameplayMode(state) {
         action: "ingredient",
         item: "garlic",
         label: "Garlic Basket",
-        image: "assets/items/garlic.png",
+        image: "assets/items/garlic.svg",
         alt: "Garlic item",
       })}
 
@@ -303,7 +303,7 @@ function renderGameplayMode(state) {
         action: "flavor",
         text: "Crunchy circles of reflection.",
         label: "Sorry-O’s",
-        image: "assets/items/sorry_cereal.png",
+        image: "assets/items/sorry_cereal.svg",
         alt: "Sorry-O's cereal",
       })}
       ${renderKitchenHotspot({
@@ -311,7 +311,7 @@ function renderGameplayMode(state) {
         action: "flavor",
         text: "Apolo-cheese accepted in cracker form.",
         label: "Apolo-cheese Crackers",
-        image: "assets/items/crackers.png",
+        image: "assets/items/crackers.svg",
         alt: "Apolo-cheese crackers",
       })}
       ${renderKitchenHotspot({
@@ -319,14 +319,14 @@ function renderGameplayMode(state) {
         action: "flavor",
         text: "A suspicious little stash of catnip.",
         label: "Catnip",
-        image: "assets/items/catnip.png",
+        image: "assets/items/catnip.svg",
         alt: "Catnip",
       })}
 
       ${spillMiniGameActive ? `
         <div class="spill-status spill-status-top" data-spill-status>${state.spongeReady ? "Tap the three spill spots to clean them." : "Tap the sponge, then clean the three spill spots."}</div>
         <div class="spill-zone" data-spill-zone>
-          <img class="spill-image" data-spill-image src="assets/items/spill.png" alt="Sauce spill" style="opacity: ${Math.max(0.2, 1 - state.scrubProgress / 8)};">
+          <img class="spill-image" data-spill-image src="assets/items/spill.svg" alt="Sauce spill" style="opacity: ${Math.max(0.2, 1 - state.scrubProgress / 8)};">
           ${!state.spillSpots.one ? `<button class="spill-spot spill-spot-one" type="button" data-kitchen-action="clean-spot" data-spot="one" aria-label="Clean spill spot one"></button>` : ""}
           ${!state.spillSpots.two ? `<button class="spill-spot spill-spot-two" type="button" data-kitchen-action="clean-spot" data-spot="two" aria-label="Clean spill spot two"></button>` : ""}
           ${!state.spillSpots.three ? `<button class="spill-spot spill-spot-three" type="button" data-kitchen-action="clean-spot" data-spot="three" aria-label="Clean spill spot three"></button>` : ""}

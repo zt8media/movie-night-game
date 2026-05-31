@@ -15,43 +15,124 @@
   --shell-gap: clamp(0.85rem, 2.2vw, 1.4rem);
   --card-radius: clamp(20px, 3vw, 28px);
   --cat-size: clamp(132px, 17vw, 198px);
-  --home-side-cat-size: clamp(250px, 16vw, 230px);
-  --home-side-cat-right: 3.65rem;
+  --home-side-cat-size: clamp(150px, 16vw, 230px);
+  --home-side-cat-right:.65rem;
   --home-side-cat-bottom: 0.8rem;
   --home-thought-right: 62%;
   --home-thought-bottom: 65%;
-  --home-side-cat-size-iphone: clamp(98px, 13.8vw, 135px);
-  --home-side-cat-right-iphone: 0.35rem;
-  --home-side-cat-bottom-iphone: 0.35rem;
+  --home-side-cat-size-iphone: clamp(260px, 13.8vw, 135px);
+  --home-side-cat-right-iphone: .35rem;
+  --home-side-cat-bottom-iphone: -4rem;
   --home-thought-width-iphone: min(24vw, 9rem);
   --home-thought-font-iphone: 0.66rem;
   --home-thought-right-iphone: 70%;
   --home-thought-bottom-iphone: 62%;
-  --remote-story-cat-size: clamp(110px, 10vw, 205px);
+  --remote-hotspot-dot-size-iphone: 1.95rem;
+  --remote-hotspot-dot-inner-inset-iphone: 0.34rem;
+  --kitchen-hotspot-pasta-top-iphone: -15%;
+  --kitchen-hotspot-pasta-left-iphone: 60%;
+  --kitchen-hotspot-pasta-width-iphone: 33%;
+  --kitchen-hotspot-sauce-top-iphone: 15%;
+  --kitchen-hotspot-sauce-left-iphone: 46%;
+  --kitchen-hotspot-sauce-width-iphone: 9%;
+  --kitchen-hotspot-cheese-top-iphone: 19%;
+  --kitchen-hotspot-cheese-left-iphone: 213%;
+  --kitchen-hotspot-cheese-width-iphone: 19%;
+  --kitchen-hotspot-garlic-top-iphone: 15%;
+  --kitchen-hotspot-garlic-left-iphone: 153%;
+  --kitchen-hotspot-garlic-width-iphone: 14%;
+  --kitchen-hotspot-sorry-bottom-iphone: 2%;
+  --kitchen-hotspot-sorry-left-iphone: 102%;
+  --kitchen-hotspot-sorry-width-iphone: 24%;
+  --kitchen-hotspot-cheese-joke-bottom-iphone: 65%;
+  --kitchen-hotspot-cheese-joke-left-iphone: 195%;
+  --kitchen-hotspot-cheese-joke-width-iphone: 25%;
+  --kitchen-hotspot-mix-bottom-iphone: -34%;
+  --kitchen-hotspot-mix-right-iphone: -70%;
+  --kitchen-hotspot-mix-width-iphone: 35%;
+  --kitchen-hotspot-spill-left-iphone: 30%;
+  --kitchen-hotspot-spill-bottom-iphone: 9%;
+  --kitchen-hotspot-sponge-left-iphone: 62%;
+  --kitchen-hotspot-sponge-bottom-iphone: 8%;
+  --kitchen-hotspot-sponge-width-iphone: 19%;
+  --kitchen-spill-zone-left-iphone: 50%;
+  --kitchen-spill-zone-bottom-iphone: 10%;
+  --kitchen-spill-zone-width-iphone: 54%;
+  --kitchen-spill-spot-one-top-iphone: 14%;
+  --kitchen-spill-spot-one-left-iphone: 10%;
+  --kitchen-spill-spot-two-top-iphone: 4%;
+  --kitchen-spill-spot-two-left-iphone: 39%;
+  --kitchen-spill-spot-three-top-iphone: 36%;
+  --kitchen-spill-spot-three-left-iphone: 58%;
+  --remote-hotspot-bookshelf-top-iphone: 1%;
+  --remote-hotspot-bookshelf-left-iphone: 3%;
+  --remote-hotspot-blanket-top-iphone: 60%;
+  --remote-hotspot-blanket-left-iphone: 40%;
+  --remote-hotspot-wall-art-top-iphone: -68%;
+  --remote-hotspot-wall-art-left-iphone: 110%;
+  --remote-hotspot-lamp-top-iphone: 40%;
+  --remote-hotspot-lamp-left-iphone: 176%;
+  --remote-hotspot-rug-left-iphone: 152%;
+  --remote-hotspot-rug-bottom-iphone: -10%;
+  --remote-hotspot-cat-bed-left-iphone: 7%;
+  --remote-hotspot-cat-bed-bottom-iphone: 15%;
+  --remote-hotspot-table-top-iphone: 58%;
+  --remote-hotspot-table-left-iphone: 105%;
+  --remote-hotspot-couch-top-iphone: 11%;
+  --remote-hotspot-couch-left-iphone: 109%;
+  --remote-hotspot-bed-right-iphone: 9%;
+  --remote-hotspot-bed-bottom-iphone: 9%;
+  --remote-story-cat-size: clamp(210px, 10vw, 205px);
   --remote-story-cat-left: -2rem;
   --remote-story-cat-bottom: -7rem;
+  --remote-story-cat-size-iphone: clamp(210px, 10vw, 205px);
+  --remote-story-cat-left-iphone: -12rem;
+  --remote-story-cat-bottom-iphone: -15rem;
   --remote-hud-cat-size: clamp(95px, 10vw, 175px);
   --remote-hud-cat-left: 1rem;
   --remote-hud-cat-bottom: 4.5rem;
+  --remote-hud-cat-size-iphone: clamp(195px, 10vw, 175px);
+  --remote-hud-cat-left-iphone: 1rem;
+  --remote-hud-cat-bottom-iphone: -1rem;
   --login-story-cat-size: clamp(110px, 15vw, 210px);
   --login-story-cat-left: -1.6rem;
   --login-story-cat-bottom: -7.5rem;
+  --login-story-cat-size-iphone: clamp(110px, 15vw, 210px);
+  --login-story-cat-left-iphone: -1.6rem;
+  --login-story-cat-bottom-iphone: -7.5rem;
   --movie-cat-size: clamp(100px, 10vw, 185px);
   --movie-cat-left: -1.4rem;
   --movie-cat-bottom: -6.8rem;
-  --kitchen-story-cat-size: clamp(130px, 20vw, 250px);
-  --kitchen-story-cat-left: -1rem;
-  --kitchen-story-cat-bottom: -8rem;
-  --kitchen-hud-cat-size: clamp(90px, 9vw, 150px);
+  --movie-cat-size-iphone: clamp(100px, 10vw, 185px);
+  --movie-cat-left-iphone: -1.4rem;
+  --movie-cat-bottom-iphone: -6.8rem;
+  --kitchen-story-stage-padding-bottom-iphone: 4.2rem;
+  --kitchen-story-cat-size: clamp(230px, 20vw, 250px);
+  --kitchen-story-cat-left: -11rem;
+  --kitchen-story-cat-bottom: 28rem;
+  --kitchen-story-cat-size-iphone: clamp(250px, 20vw, 250px);
+  --kitchen-story-cat-left-iphone: -11rem;
+  --kitchen-story-cat-bottom-iphone: -19rem;
+  --kitchen-hud-cat-size: clamp(290px, 9vw, 150px);
   --kitchen-hud-cat-left: 0.75rem;
-  --kitchen-hud-cat-bottom: 4.5rem;
+  --kitchen-hud-cat-bottom: -3rem;
+  --kitchen-hud-cat-size-iphone: clamp(265px, 9vw, 150px);
+  --kitchen-hud-cat-left-iphone: 30rem;
+  --kitchen-hud-cat-bottom-iphone: -8rem;
   --ending-cat-apology-size: clamp(130px, 17vw, 220px);
   --ending-cat-apology-x: 0px;
   --ending-cat-apology-y: 86px;
+  --ending-cat-apology-size-iphone: clamp(130px, 17vw, 220px);
+  --ending-cat-apology-x-iphone: 0px;
+  --ending-cat-apology-y-iphone: 86px;
   --ending-cat-sleep-size: clamp(130px, 17vw, 220px);
   --ending-cat-sleep-x: 0px;
   --ending-cat-sleep-y: 108px;
   --ending-cat-sleep-scale: 1.04;
+  --ending-cat-sleep-size-iphone: clamp(130px, 17vw, 220px);
+  --ending-cat-sleep-x-iphone: 0px;
+  --ending-cat-sleep-y-iphone: 108px;
+  --ending-cat-sleep-scale-iphone: 1.04;
 }
 
 html {
@@ -2179,11 +2260,71 @@ button {
   }
 
   .kitchen-scene .story-stage {
-    padding-bottom: 4.2rem;
+    padding-bottom: var(--kitchen-story-stage-padding-bottom-iphone);
   }
 
   .kitchen-scene .story-characters {
-    bottom: -4.2rem;
+    left: var(--kitchen-story-cat-left-iphone);
+    bottom: var(--kitchen-story-cat-bottom-iphone);
+  }
+
+  .kitchen-scene .story-cat-art {
+    width: var(--kitchen-story-cat-size-iphone);
+  }
+
+  .kitchen-scene .kitchen-hud .cat-status {
+    left: var(--kitchen-hud-cat-left-iphone);
+    bottom: var(--kitchen-hud-cat-bottom-iphone);
+  }
+
+  .kitchen-scene .kitchen-hud .cat-status img {
+    width: var(--kitchen-hud-cat-size-iphone);
+  }
+
+  .remote-scene .story-characters {
+    left: var(--remote-story-cat-left-iphone);
+    bottom: var(--remote-story-cat-bottom-iphone);
+  }
+
+  .remote-scene .story-cat-art {
+    width: var(--remote-story-cat-size-iphone);
+  }
+
+  .remote-scene .remote-hud .cat-status {
+    left: var(--remote-hud-cat-left-iphone);
+    bottom: var(--remote-hud-cat-bottom-iphone);
+  }
+
+  .remote-scene .remote-hud .cat-status img {
+    width: var(--remote-hud-cat-size-iphone);
+  }
+
+  .login-scene .story-characters {
+    left: var(--login-story-cat-left-iphone);
+    bottom: var(--login-story-cat-bottom-iphone);
+  }
+
+  .login-scene .story-cat-art {
+    width: var(--login-story-cat-size-iphone);
+  }
+
+  .movie-select-scene .story-characters {
+    left: var(--movie-cat-left-iphone);
+    bottom: var(--movie-cat-bottom-iphone);
+  }
+
+  .movie-select-scene .story-cat-art {
+    width: var(--movie-cat-size-iphone);
+  }
+
+  .ending-cat-apology {
+    width: var(--ending-cat-apology-size-iphone);
+    transform: translate(var(--ending-cat-apology-x-iphone), var(--ending-cat-apology-y-iphone));
+  }
+
+  .ending-cat-sleeping {
+    width: var(--ending-cat-sleep-size-iphone);
+    transform: translate(var(--ending-cat-sleep-x-iphone), var(--ending-cat-sleep-y-iphone)) scale(var(--ending-cat-sleep-scale-iphone));
   }
 
   .scene-overlay {
@@ -2418,19 +2559,106 @@ button {
     max-width: none;
   }
 
-  .kitchen-scene-gameplay .hotspot-pasta { top: 46%; left: 45%; width: 13%; }
-  .kitchen-scene-gameplay .hotspot-sauce { top: 49%; left: 36%; width: 9%; }
-  .kitchen-scene-gameplay .hotspot-cheese { top: 49%; left: 62%; width: 9%; }
-  .kitchen-scene-gameplay .hotspot-garlic { top: 44%; left: 53%; width: 8%; }
-  .kitchen-scene-gameplay .hotspot-sorry { bottom: 18%; left: 42%; width: 10%; }
-  .kitchen-scene-gameplay .hotspot-cheese-joke { bottom: 17%; left: 57%; width: 10%; }
-  .kitchen-scene-gameplay .hotspot-mix { bottom: 14%; right: 14%; width: 9.5%; }
-  .hotspot-spill { left: 30%; bottom: 9%; }
-  .hotspot-sponge { left: 62%; bottom: 8%; width: 19%; }
-  .spill-zone { left: 50%; bottom: 10%; width: 54%; max-width: none; transform: translateX(-50%); }
-  .spill-spot-one { top: 14%; left: 10%; }
-  .spill-spot-two { top: 4%; left: 39%; }
-  .spill-spot-three { top: 36%; left: 58%; }
+  .kitchen-scene-gameplay .hotspot-pasta {
+    top: var(--kitchen-hotspot-pasta-top-iphone);
+    left: var(--kitchen-hotspot-pasta-left-iphone);
+    width: var(--kitchen-hotspot-pasta-width-iphone);
+  }
+  .kitchen-scene-gameplay .hotspot-sauce {
+    top: var(--kitchen-hotspot-sauce-top-iphone);
+    left: var(--kitchen-hotspot-sauce-left-iphone);
+    width: var(--kitchen-hotspot-sauce-width-iphone);
+  }
+  .kitchen-scene-gameplay .hotspot-cheese {
+    top: var(--kitchen-hotspot-cheese-top-iphone);
+    left: var(--kitchen-hotspot-cheese-left-iphone);
+    width: var(--kitchen-hotspot-cheese-width-iphone);
+  }
+  .kitchen-scene-gameplay .hotspot-garlic {
+    top: var(--kitchen-hotspot-garlic-top-iphone);
+    left: var(--kitchen-hotspot-garlic-left-iphone);
+    width: var(--kitchen-hotspot-garlic-width-iphone);
+  }
+  .kitchen-scene-gameplay .hotspot-sorry {
+    bottom: var(--kitchen-hotspot-sorry-bottom-iphone);
+    left: var(--kitchen-hotspot-sorry-left-iphone);
+    width: var(--kitchen-hotspot-sorry-width-iphone);
+  }
+  .kitchen-scene-gameplay .hotspot-cheese-joke {
+    bottom: var(--kitchen-hotspot-cheese-joke-bottom-iphone);
+    left: var(--kitchen-hotspot-cheese-joke-left-iphone);
+    width: var(--kitchen-hotspot-cheese-joke-width-iphone);
+  }
+  .kitchen-scene-gameplay .hotspot-mix {
+    bottom: var(--kitchen-hotspot-mix-bottom-iphone);
+    right: var(--kitchen-hotspot-mix-right-iphone);
+    width: var(--kitchen-hotspot-mix-width-iphone);
+  }
+  .kitchen-scene-gameplay .hotspot-spill {
+    left: var(--kitchen-hotspot-spill-left-iphone);
+    bottom: var(--kitchen-hotspot-spill-bottom-iphone);
+  }
+  .kitchen-scene-gameplay .hotspot-sponge {
+    left: var(--kitchen-hotspot-sponge-left-iphone);
+    bottom: var(--kitchen-hotspot-sponge-bottom-iphone);
+    width: var(--kitchen-hotspot-sponge-width-iphone);
+  }
+  .kitchen-scene-gameplay .spill-zone {
+    left: var(--kitchen-spill-zone-left-iphone);
+    bottom: var(--kitchen-spill-zone-bottom-iphone);
+    width: var(--kitchen-spill-zone-width-iphone);
+    max-width: none;
+    transform: translateX(-50%);
+  }
+  .kitchen-scene-gameplay .spill-spot-one {
+    top: var(--kitchen-spill-spot-one-top-iphone);
+    left: var(--kitchen-spill-spot-one-left-iphone);
+  }
+  .kitchen-scene-gameplay .spill-spot-two {
+    top: var(--kitchen-spill-spot-two-top-iphone);
+    left: var(--kitchen-spill-spot-two-left-iphone);
+  }
+  .kitchen-scene-gameplay .spill-spot-three {
+    top: var(--kitchen-spill-spot-three-top-iphone);
+    left: var(--kitchen-spill-spot-three-left-iphone);
+  }
+  .remote-scene .hotspot-bookshelf {
+    top: var(--remote-hotspot-bookshelf-top-iphone);
+    left: var(--remote-hotspot-bookshelf-left-iphone);
+  }
+  .remote-scene .hotspot-blanket {
+    top: var(--remote-hotspot-blanket-top-iphone);
+    left: var(--remote-hotspot-blanket-left-iphone);
+  }
+  .remote-scene .hotspot-wall-art {
+    top: var(--remote-hotspot-wall-art-top-iphone);
+    left: var(--remote-hotspot-wall-art-left-iphone);
+  }
+  .remote-scene .hotspot-lamp {
+    top: var(--remote-hotspot-lamp-top-iphone);
+    left: var(--remote-hotspot-lamp-left-iphone);
+  }
+  .remote-scene .hotspot-rug {
+    left: var(--remote-hotspot-rug-left-iphone);
+    bottom: var(--remote-hotspot-rug-bottom-iphone);
+  }
+  .remote-scene .hotspot-cat-bed {
+    left: var(--remote-hotspot-cat-bed-left-iphone);
+    bottom: var(--remote-hotspot-cat-bed-bottom-iphone);
+  }
+  .remote-scene .hotspot-table {
+    top: var(--remote-hotspot-table-top-iphone);
+    left: var(--remote-hotspot-table-left-iphone);
+  }
+  .remote-scene .hotspot-remote-couch {
+    top: var(--remote-hotspot-couch-top-iphone);
+    left: var(--remote-hotspot-couch-left-iphone);
+    bottom: auto;
+  }
+  .remote-scene .hotspot-remote-bed {
+    right: var(--remote-hotspot-bed-right-iphone);
+    bottom: var(--remote-hotspot-bed-bottom-iphone);
+  }
 }
 
 /* Centering fix: login + movie-select */
