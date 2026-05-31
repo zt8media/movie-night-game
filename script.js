@@ -17,6 +17,7 @@ const sceneRegistry = {
 
 const app = document.querySelector("#app");
 const backButton = document.querySelector("#back-button");
+const immersiveButton = document.querySelector("#immersive-button");
 const settingsButton = document.querySelector("#settings-button");
 const settingsPanel = document.querySelector("#settings-panel");
 const resumeButton = document.querySelector("#resume-button");
@@ -322,6 +323,28 @@ function updateBackButton() {
   backButton.disabled = state.history.length === 0 || state.currentScene === "home";
 }
 
+async function enterImmersiveMode() {
+  const root = document.documentElement;
+  const request = root.requestFullscreen || root.webkitRequestFullscreen;
+
+  if (request) {
+    try {
+      await request.call(root);
+      return;
+    } catch {
+      // Continue to iPhone fallback guidance.
+    }
+  }
+
+  const isIphone = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (isIphone) {
+    window.alert("iPhone full-screen tip:\nTap Share -> Add to Home Screen, then open Movie Night from your Home Screen.");
+    return;
+  }
+
+  window.alert("Full-screen mode is not available in this browser.");
+}
+
 function goToScene(sceneId, options = {}) {
   if (!sceneRegistry[sceneId]) {
     throw new Error(`Unknown scene: ${sceneId}`);
@@ -443,6 +466,7 @@ function renderScene() {
 }
 
 backButton.addEventListener("click", goBack);
+immersiveButton?.addEventListener("click", enterImmersiveMode);
 settingsButton.addEventListener("click", () => toggleSettings());
 resumeButton.addEventListener("click", () => toggleSettings(false));
 resumeAppButton.addEventListener("click", () => toggleSettings(false));
