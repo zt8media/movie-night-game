@@ -39,6 +39,10 @@ const spotifyNowPlaying = document.querySelector("#spotify-now-playing");
 const spotifyPlaylist = document.querySelector("#spotify-playlist");
 const orientationOverlay = document.querySelector("#orientation-overlay");
 const bgMusic = document.querySelector("#bg-music");
+const viewportDebug = document.querySelector("#viewport-debug");
+
+const debugParam = new URLSearchParams(window.location.search).get("debug");
+const debugEnabled = debugParam !== null && !["0", "false", "off", "no"].includes(debugParam.toLowerCase());
 
 const notesContent = {
   grocery: {
@@ -253,6 +257,33 @@ function updateOrientationGate() {
   orientationOverlay.setAttribute("aria-hidden", String(!shouldBlock));
 }
 
+function updateViewportDebugBadge() {
+  if (!debugEnabled || !viewportDebug) {
+    return;
+  }
+
+  const visual = window.visualViewport;
+  const matchesMobile820 = window.matchMedia("(max-width: 820px)").matches;
+  const matchesIphoneLandscape = window.matchMedia("(orientation: landscape) and (pointer: coarse) and (max-height: 620px)").matches;
+  const orientation = window.matchMedia("(orientation: landscape)").matches ? "landscape" : "portrait";
+  const innerWidth = Math.round(window.innerWidth);
+  const innerHeight = Math.round(window.innerHeight);
+  const visualWidth = visual ? Math.round(visual.width) : 0;
+  const visualHeight = visual ? Math.round(visual.height) : 0;
+  const visualScale = visual ? visual.scale.toFixed(2) : "n/a";
+  const dpr = Number.isFinite(window.devicePixelRatio) ? window.devicePixelRatio.toFixed(2) : "n/a";
+
+  const lines = [
+    `scene ${state.currentScene} | phone:${state.settingsOpen ? "open" : "closed"}`,
+    `inner ${innerWidth}x${innerHeight} | dpr ${dpr}`,
+    `visual ${visualWidth}x${visualHeight} | scale ${visualScale}`,
+    `screen ${window.screen.width}x${window.screen.height}`,
+    `o:${orientation} m820:${matchesMobile820 ? "1" : "0"} iph-land:${matchesIphoneLandscape ? "1" : "0"}`,
+  ];
+
+  viewportDebug.textContent = lines.join("\n");
+}
+
 function toggleSettings(forceOpen) {
   const open = typeof forceOpen === "boolean" ? forceOpen : !state.settingsOpen;
   state.settingsOpen = open;
@@ -262,6 +293,7 @@ function toggleSettings(forceOpen) {
   settingsPanel.classList.toggle("hidden", !open);
   settingsPanel.setAttribute("aria-hidden", String(!open));
   renderPhoneView();
+  updateViewportDebugBadge();
 }
 
 function updateBackButton() {
@@ -286,6 +318,7 @@ function goToScene(sceneId, options = {}) {
   }
 
   renderScene();
+  updateViewportDebugBadge();
 }
 
 function goBack() {
@@ -384,6 +417,7 @@ function renderScene() {
   }
 
   updateBackButton();
+  updateViewportDebugBadge();
 }
 
 backButton.addEventListener("click", goBack);
@@ -433,11 +467,24 @@ setVolumeLabel();
 syncMusicState();
 renderPhoneView();
 updateOrientationGate();
+
+if (debugEnabled && viewportDebug) {
+  viewportDebug.classList.remove("hidden");
+  updateViewportDebugBadge();
+}
+
 window.addEventListener("pointerdown", tryStartMusic, { once: true });
 window.addEventListener("keydown", tryStartMusic, { once: true });
 
 window.addEventListener("resize", updateOrientationGate);
 window.addEventListener("orientationchange", updateOrientationGate);
+window.addEventListener("resize", updateViewportDebugBadge);
+window.addEventListener("orientationchange", updateViewportDebugBadge);
+
+if (window.visualViewport) {
+  window.visualViewport.addEventListener("resize", updateViewportDebugBadge);
+  window.visualViewport.addEventListener("scroll", updateViewportDebugBadge);
+}
 
 const save = loadSave();
 if (save.hasSave && save.currentScene !== "home") {

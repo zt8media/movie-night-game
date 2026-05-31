@@ -1863,6 +1863,24 @@ button {
   background: rgba(6, 10, 18, 0.96);
 }
 
+.viewport-debug {
+  position: fixed;
+  top: max(0.55rem, env(safe-area-inset-top));
+  left: max(0.55rem, env(safe-area-inset-left));
+  z-index: 9;
+  margin: 0;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid rgba(222, 239, 255, 0.38);
+  border-radius: 0.6rem;
+  background: rgba(6, 10, 18, 0.78);
+  color: rgba(225, 243, 255, 0.98);
+  font: 600 10px/1.28 "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+  white-space: pre;
+  pointer-events: none;
+  max-width: min(62vw, 18rem);
+  backdrop-filter: blur(4px);
+}
+
 .orientation-card {
   width: min(100%, 24rem);
   display: grid;
