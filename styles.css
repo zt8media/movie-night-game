@@ -15,11 +15,18 @@
   --shell-gap: clamp(0.85rem, 2.2vw, 1.4rem);
   --card-radius: clamp(20px, 3vw, 28px);
   --cat-size: clamp(132px, 17vw, 198px);
-  --home-side-cat-size: clamp(150px, 16vw, 230px);
-  --home-side-cat-right: 0.65rem;
+  --home-side-cat-size: clamp(250px, 16vw, 230px);
+  --home-side-cat-right: 3.65rem;
   --home-side-cat-bottom: 0.8rem;
   --home-thought-right: 62%;
   --home-thought-bottom: 65%;
+  --home-side-cat-size-iphone: clamp(98px, 13.8vw, 135px);
+  --home-side-cat-right-iphone: 0.35rem;
+  --home-side-cat-bottom-iphone: 0.35rem;
+  --home-thought-width-iphone: min(24vw, 9rem);
+  --home-thought-font-iphone: 0.66rem;
+  --home-thought-right-iphone: 70%;
+  --home-thought-bottom-iphone: 62%;
   --remote-story-cat-size: clamp(110px, 10vw, 205px);
   --remote-story-cat-left: -2rem;
   --remote-story-cat-bottom: -7rem;
@@ -2198,19 +2205,19 @@ button {
   }
 
   .home-side-cat {
-    right: 0.35rem;
-    bottom: 0.35rem;
+    right: var(--home-side-cat-right-iphone);
+    bottom: var(--home-side-cat-bottom-iphone);
   }
 
   .home-side-cat-image {
-    width: clamp(98px, 13.8vw, 135px);
+    width: var(--home-side-cat-size-iphone);
   }
 
   .home-thought-bubble {
-    width: min(24vw, 9rem);
-    font-size: 0.66rem;
-    right: 70%;
-    bottom: 62%;
+    width: var(--home-thought-width-iphone);
+    font-size: var(--home-thought-font-iphone);
+    right: var(--home-thought-right-iphone);
+    bottom: var(--home-thought-bottom-iphone);
   }
 
   .kitchen-scene-gameplay {
