@@ -363,7 +363,7 @@ export function createKitchenScene() {
     background: "assets/backgrounds/bg_kitchen.png",
     render() {
       return `
-        <section class="scene-card kitchen-scene ${state.gameplayStarted ? "kitchen-scene-gameplay" : "kitchen-scene-story"}" style="background-image: linear-gradient(rgba(3, 9, 18, 0.16), rgba(3, 9, 18, 0.58)), url('assets/backgrounds/bg_kitchen.png')">
+        <section class="scene-card kitchen-scene ${state.gameplayStarted ? "kitchen-scene-gameplay" : "kitchen-scene-story"} ${state.spillTriggered && !state.spillCleaned ? "kitchen-spill-active" : ""}" style="background-image: linear-gradient(rgba(3, 9, 18, 0.16), rgba(3, 9, 18, 0.58)), url('assets/backgrounds/bg_kitchen.png')">
           ${!state.storyComplete ? renderStoryMode(state) : !state.gameplayStarted ? renderCookbookMode(state) : renderGameplayMode(state)}
         </section>
       `;

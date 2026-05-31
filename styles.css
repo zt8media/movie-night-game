@@ -50,10 +50,10 @@
   --kitchen-hotspot-mix-bottom-iphone: -34%;
   --kitchen-hotspot-mix-right-iphone: -70%;
   --kitchen-hotspot-mix-width-iphone: 35%;
-  --kitchen-hotspot-spill-left-iphone: 30%;
-  --kitchen-hotspot-spill-bottom-iphone: 9%;
-  --kitchen-hotspot-sponge-left-iphone: 62%;
-  --kitchen-hotspot-sponge-bottom-iphone: 8%;
+  --kitchen-hotspot-spill-left-iphone: 113%;
+  --kitchen-hotspot-spill-bottom-iphone: 19%;
+  --kitchen-hotspot-sponge-left-iphone: 135%;
+  --kitchen-hotspot-sponge-bottom-iphone: 32%;
   --kitchen-hotspot-sponge-width-iphone: 19%;
   --kitchen-spill-zone-left-iphone: 50%;
   --kitchen-spill-zone-bottom-iphone: 10%;
@@ -1036,6 +1036,33 @@ button {
 .kitchen-scene-gameplay .dialogue-box {
   padding: 0.72rem 0.55rem 0.72rem 0.9rem;
   border-radius: 18px;
+  z-index: 14;
+}
+
+.kitchen-scene-gameplay .spill-status {
+  z-index: 13;
+}
+
+.kitchen-scene-gameplay .spill-status-top {
+  left: auto;
+  right: max(5rem, env(safe-area-inset-right));
+  transform: none;
+  width: min(36vw, 16rem);
+  max-width: calc(100% - 1.5rem);
+}
+
+.kitchen-scene.kitchen-spill-active .spill-zone {
+  z-index: 11;
+}
+
+.kitchen-scene.kitchen-spill-active .hotspot-sponge {
+  z-index: 12;
+  pointer-events: auto;
+}
+
+.kitchen-scene.kitchen-spill-active .hotspot-kitchen-art:not(.hotspot-sponge) {
+  pointer-events: none;
+  z-index: 3;
 }
 
 .kitchen-scene-gameplay .dialogue-text {
@@ -2594,18 +2621,14 @@ button {
     right: var(--kitchen-hotspot-mix-right-iphone);
     width: var(--kitchen-hotspot-mix-width-iphone);
   }
-  .kitchen-scene-gameplay .hotspot-spill {
-    left: var(--kitchen-hotspot-spill-left-iphone);
-    bottom: var(--kitchen-hotspot-spill-bottom-iphone);
-  }
   .kitchen-scene-gameplay .hotspot-sponge {
     left: var(--kitchen-hotspot-sponge-left-iphone);
     bottom: var(--kitchen-hotspot-sponge-bottom-iphone);
     width: var(--kitchen-hotspot-sponge-width-iphone);
   }
   .kitchen-scene-gameplay .spill-zone {
-    left: var(--kitchen-spill-zone-left-iphone);
-    bottom: var(--kitchen-spill-zone-bottom-iphone);
+    left: var(--kitchen-hotspot-spill-left-iphone);
+    bottom: var(--kitchen-hotspot-spill-bottom-iphone);
     width: var(--kitchen-spill-zone-width-iphone);
     max-width: none;
     transform: translateX(-50%);
