@@ -40,9 +40,15 @@ const spotifyPlaylist = document.querySelector("#spotify-playlist");
 const orientationOverlay = document.querySelector("#orientation-overlay");
 const bgMusic = document.querySelector("#bg-music");
 const viewportDebug = document.querySelector("#viewport-debug");
+const gameTitle = document.querySelector(".game-title");
 
 const debugParam = new URLSearchParams(window.location.search).get("debug");
-const debugEnabled = debugParam !== null && !["0", "false", "off", "no"].includes(debugParam.toLowerCase());
+const DEBUG_STORAGE_KEY = "movie-night-debug-overlay";
+const storedDebugEnabled = localStorage.getItem(DEBUG_STORAGE_KEY) === "1";
+const hashDebugEnabled = window.location.hash.toLowerCase().includes("debug");
+let debugEnabled = debugParam !== null
+  ? !["0", "false", "off", "no"].includes(debugParam.toLowerCase())
+  : storedDebugEnabled || hashDebugEnabled;
 
 const notesContent = {
   grocery: {
@@ -284,6 +290,22 @@ function updateViewportDebugBadge() {
   viewportDebug.textContent = lines.join("\n");
 }
 
+function setDebugEnabled(nextEnabled) {
+  debugEnabled = Boolean(nextEnabled);
+
+  if (debugEnabled) {
+    localStorage.setItem(DEBUG_STORAGE_KEY, "1");
+  } else {
+    localStorage.removeItem(DEBUG_STORAGE_KEY);
+  }
+
+  if (viewportDebug) {
+    viewportDebug.classList.toggle("hidden", !debugEnabled);
+  }
+
+  updateViewportDebugBadge();
+}
+
 function toggleSettings(forceOpen) {
   const open = typeof forceOpen === "boolean" ? forceOpen : !state.settingsOpen;
   state.settingsOpen = open;
@@ -468,10 +490,32 @@ syncMusicState();
 renderPhoneView();
 updateOrientationGate();
 
-if (debugEnabled && viewportDebug) {
-  viewportDebug.classList.remove("hidden");
+if (viewportDebug) {
+  viewportDebug.classList.toggle("hidden", !debugEnabled);
+}
+
+if (debugEnabled) {
   updateViewportDebugBadge();
 }
+
+let debugTapCount = 0;
+let debugTapTimer = null;
+gameTitle?.addEventListener("click", () => {
+  debugTapCount += 1;
+
+  if (debugTapTimer) {
+    clearTimeout(debugTapTimer);
+  }
+
+  debugTapTimer = window.setTimeout(() => {
+    debugTapCount = 0;
+  }, 650);
+
+  if (debugTapCount >= 3) {
+    debugTapCount = 0;
+    setDebugEnabled(!debugEnabled);
+  }
+});
 
 window.addEventListener("pointerdown", tryStartMusic, { once: true });
 window.addEventListener("keydown", tryStartMusic, { once: true });
