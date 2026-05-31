@@ -24,8 +24,6 @@ const resumeButton = document.querySelector("#resume-button");
 const resumeAppButton = document.querySelector("#resume-app-button");
 const returnHomeButton = document.querySelector("#return-home-button");
 const muteButton = document.querySelector("#mute-button");
-const volumeSlider = document.querySelector("#volume-slider");
-const volumeValue = document.querySelector("#volume-value");
 const resetSaveButton = document.querySelector("#reset-save-button");
 const notesOpenButton = document.querySelector("#notes-open-button");
 const spotifyOpenButton = document.querySelector("#spotify-open-button");
@@ -134,6 +132,11 @@ const state = {
   selectedSong: "",
 };
 
+const MUSIC_LEVELS = {
+  mute: 0,
+  low: 0.02,
+};
+
 function clampVolume(value) {
   const parsed = Number(value);
   if (Number.isNaN(parsed)) {
@@ -144,17 +147,37 @@ function clampVolume(value) {
 
 state.settings.musicVolume = clampVolume(state.settings.musicVolume);
 
+function normalizeMusicLevel(settings) {
+  if (settings.musicMuted) {
+    return "mute";
+  }
+
+  if (settings.musicLevel && MUSIC_LEVELS[settings.musicLevel] !== undefined) {
+    return settings.musicLevel;
+  }
+
+  return "low";
+}
+
+state.settings.musicLevel = normalizeMusicLevel(state.settings);
+
 function setMuteLabel() {
-  muteButton.innerHTML = `<span class="phone-app-icon">${state.settings.musicMuted ? "🔇" : "🔊"}</span><span class="phone-app-label">Music: ${state.settings.musicMuted ? "Off" : "On"}</span>`;
+  muteButton.innerHTML = `<span class="phone-app-icon">${state.settings.musicLevel === "mute" ? "🔇" : "🔊"}</span><span class="phone-app-label">Music: ${state.settings.musicLevel === "mute" ? "Mute" : "Low"}</span>`;
 }
 
 function setVolumeLabel() {
-  if (!volumeSlider || !volumeValue) {
-    return;
-  }
-  const volumePercent = Math.round(clampVolume(state.settings.musicVolume) * 100);
-  volumeSlider.value = String(volumePercent);
-  volumeValue.textContent = `${volumePercent}%`;
+  return;
+}
+
+function applyMusicLevel(level) {
+  const nextLevel = MUSIC_LEVELS[level] !== undefined ? level : "low";
+  state.settings.musicLevel = nextLevel;
+  state.settings.musicMuted = nextLevel === "mute";
+  state.settings.musicVolume = clampVolume(MUSIC_LEVELS[nextLevel]);
+  saveSettings(state.settings);
+  setMuteLabel();
+  setVolumeLabel();
+  syncMusicState();
 }
 
 function tryStartMusic() {
@@ -490,16 +513,12 @@ document.querySelectorAll("[data-phone-note]").forEach((button) => {
   });
 });
 muteButton.addEventListener("click", () => {
-  state.settings.musicMuted = !state.settings.musicMuted;
-  saveSettings(state.settings);
-  setMuteLabel();
-  syncMusicState();
-});
-volumeSlider?.addEventListener("input", () => {
-  state.settings.musicVolume = clampVolume(Number(volumeSlider.value) / 100);
-  saveSettings(state.settings);
-  setVolumeLabel();
-  syncMusicState();
+  if (state.settings.musicLevel === "mute") {
+    applyMusicLevel("low");
+    return;
+  }
+
+  applyMusicLevel("mute");
 });
 resetSaveButton.addEventListener("click", () => {
   resetSave();

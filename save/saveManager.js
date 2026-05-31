@@ -10,7 +10,8 @@ const defaultSave = {
 
 const defaultSettings = {
   musicMuted: false,
-  musicVolume: 0.45,
+  musicVolume: 0.02,
+  musicLevel: "low",
 };
 
 function safeParse(value, fallback) {

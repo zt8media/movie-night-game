@@ -123,7 +123,21 @@ export function createLoginScene() {
       `;
     },
     setup({ app, renderScene, goToScene }) {
+      let messageRunToken = 0;
+
+      const isLoginSceneActive = () => Boolean(app.querySelector(".login-scene"));
+
       const saveAndRender = () => {
+        persistLoginState(state);
+        renderScene();
+      };
+
+      const applyMessageIfCurrent = (token, speaker, text) => {
+        if (token !== messageRunToken || !isLoginSceneActive()) {
+          return;
+        }
+
+        state.activeMessage = { speaker, text };
         persistLoginState(state);
         renderScene();
       };
@@ -154,15 +168,15 @@ export function createLoginScene() {
           }
 
           if (action === "submit-password") {
+            messageRunToken += 1;
+            const runToken = messageRunToken;
             const entered = state.enteredPassword.trim();
             if (entered !== correctPassword) {
               setMessage(state, "TV", "Incorrect password.");
               persistLoginState(state);
               renderScene();
               setTimeout(() => {
-                state.activeMessage = { speaker: "Owner", text: "Nope." };
-                persistLoginState(state);
-                renderScene();
+                applyMessageIfCurrent(runToken, "Owner", "Nope.");
               }, 400);
               return;
             }
@@ -172,15 +186,11 @@ export function createLoginScene() {
             persistLoginState(state);
             renderScene();
             setTimeout(() => {
-              if (state.loginComplete) {
-                state.activeMessage = { speaker: "Owner", text: "There we go." };
-                persistLoginState(state);
-                renderScene();
+              if (state.loginComplete && runToken === messageRunToken && isLoginSceneActive()) {
+                applyMessageIfCurrent(runToken, "Owner", "There we go.");
                 setTimeout(() => {
-                  if (state.loginComplete) {
-                    state.activeMessage = { speaker: "Cat", text: "Maybe that helped." };
-                    persistLoginState(state);
-                    renderScene();
+                  if (state.loginComplete && runToken === messageRunToken && isLoginSceneActive()) {
+                    applyMessageIfCurrent(runToken, "Cat", "Maybe that helped.");
                   }
                 }, 450);
               }

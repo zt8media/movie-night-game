@@ -369,7 +369,21 @@ export function createKitchenScene() {
       `;
     },
     setup({ app, renderScene, goToScene }) {
+      let messageRunToken = 0;
+
+      const isKitchenSceneActive = () => Boolean(app.querySelector(".kitchen-scene"));
+
       const saveAndRender = () => {
+        persistKitchenState(state);
+        renderScene();
+      };
+
+      const applyMessageIfCurrent = (token, speaker, text) => {
+        if (token !== messageRunToken || !isKitchenSceneActive()) {
+          return;
+        }
+
+        state.activeMessage = { speaker, text };
         persistKitchenState(state);
         renderScene();
       };
@@ -421,13 +435,13 @@ export function createKitchenScene() {
 
           if (action === "choose-recipe") {
             if (button.dataset.choice === "water") {
+              messageRunToken += 1;
+              const runToken = messageRunToken;
               state.recipeOpen = false;
               setMessage(state, "Owner", "We should probably eat something.");
               saveAndRender();
               setTimeout(() => {
-                state.activeMessage = { speaker: "Cat", text: "That was worth a shot." };
-                persistKitchenState(state);
-                renderScene();
+                applyMessageIfCurrent(runToken, "Cat", "That was worth a shot.");
               }, 350);
               return;
             }

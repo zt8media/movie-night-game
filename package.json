@@ -4,7 +4,10 @@
   "description": "Movie Night is a browser-based point-and-click adventure game scaffold built with HTML, CSS, and vanilla JavaScript. This first step sets up the project foundation only: scene navigation, local save support, settings UI, placeholder scenes, and placeholder art assets.",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "playwright test",
+    "test:external": "PLAYWRIGHT_EXTERNAL_SERVER=1 playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
     "dev:live": "browser-sync start --server --host 0.0.0.0 --port 5502 --files \"index.html,styles.css,script.js,scenes/**/*.js,save/**/*.js,assets/**/*\" --open external",
     "dev:lan": "python3 -m http.server 5502 --bind 0.0.0.0"
   },
@@ -20,6 +23,7 @@
   },
   "homepage": "https://github.com/zt8media/movie-night-game#readme",
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "browser-sync": "^3.0.4"
   }
 }
