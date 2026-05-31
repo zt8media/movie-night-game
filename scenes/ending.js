@@ -95,7 +95,7 @@ export function createEndingScene() {
         : "";
 
       return `
-        <section class="scene-card ending-scene" style="background-image: linear-gradient(rgba(33, 18, 46, 0.12), rgba(33, 18, 46, 0.48)), url('assets/backgrounds/bg_livingroom_end.png')">
+        <section class="scene-card ending-scene ${state.cardsComplete ? "ending-scene-complete" : ""}" style="background-image: linear-gradient(rgba(33, 18, 46, 0.12), rgba(33, 18, 46, 0.48)), url('assets/backgrounds/bg_livingroom_end.png')">
           <div class="ending-stage">
             <div class="ending-characters">
               <img

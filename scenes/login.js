@@ -117,7 +117,7 @@ export function createLoginScene() {
     background: "assets/backgrounds/bg_tv_login.png",
     render() {
       return `
-        <section class="scene-card kitchen-scene login-scene ${state.gameplayStarted ? "kitchen-scene-gameplay" : "kitchen-scene-story"}" style="background-image: linear-gradient(rgba(33, 18, 46, 0.16), rgba(33, 18, 46, 0.54)), url('assets/backgrounds/bg_tv_login.png')">
+        <section class="scene-card login-scene ${state.gameplayStarted ? "login-scene-gameplay" : "login-scene-story"}" style="background-image: linear-gradient(rgba(33, 18, 46, 0.16), rgba(33, 18, 46, 0.54)), url('assets/backgrounds/bg_tv_login.png')">
           ${!state.gameplayStarted ? renderStoryMode(state) : renderGameplayMode(state)}
         </section>
       `;
