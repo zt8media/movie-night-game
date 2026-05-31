@@ -2102,8 +2102,18 @@ button {
 }
 
 @media (orientation: landscape) and (pointer: coarse) and (max-height: 620px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
   .app-shell {
+    height: 100svh;
+    min-height: 100svh;
     padding: max(0.45rem, env(safe-area-inset-top)) max(0.6rem, env(safe-area-inset-right)) max(0.45rem, env(safe-area-inset-bottom)) max(0.6rem, env(safe-area-inset-left));
+    overflow: hidden;
   }
 
   .top-bar {
@@ -2121,17 +2131,48 @@ button {
 
   .scene-root {
     align-items: stretch;
-    padding: 0 0 calc(var(--safe-bottom) + 3.4rem);
-    overflow: visible;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
   }
 
   .scene-card {
     width: 100%;
-    min-height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - 3.05rem);
-    max-height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - 3.05rem);
+    height: 100%;
+    min-height: 0;
+    max-height: none;
     border-radius: 18px;
     padding: 0.68rem;
-    overflow: hidden;
+    overflow: auto;
+  }
+
+  .settings-button {
+    width: 3.9rem;
+    height: 4.75rem;
+    right: max(0.45rem, env(safe-area-inset-right));
+    bottom: max(0.45rem, env(safe-area-inset-bottom));
+  }
+
+  .phone-launcher-icon {
+    width: 2.55rem;
+    height: 2.95rem;
+  }
+
+  .phone-launcher-label {
+    font-size: 0.58rem;
+  }
+
+  .kitchen-scene-story {
+    justify-content: flex-start;
+    overflow: auto;
+  }
+
+  .kitchen-scene .story-stage {
+    padding-bottom: 4.2rem;
+  }
+
+  .kitchen-scene .story-characters {
+    bottom: -4.2rem;
   }
 
   .scene-overlay {
@@ -2332,8 +2373,10 @@ button {
 
   .story-stage,
   .cookbook-stage {
-    width: min(100%, 31rem);
-    max-width: 31rem;
+    width: min(100%, 30rem);
+    max-width: 30rem;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   .cookbook-panel {
