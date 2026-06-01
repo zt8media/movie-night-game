@@ -2058,6 +2058,30 @@ button {
   -webkit-overflow-scrolling: touch;
 }
 
+.spotify-playlist-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.spotify-playlist-tab {
+  min-height: 2.9rem;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid rgba(111, 227, 142, 0.16);
+  border-radius: 0.95rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(246, 255, 249, 0.84);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.spotify-playlist-tab-active {
+  background: rgba(111, 227, 142, 0.18);
+  border-color: rgba(111, 227, 142, 0.32);
+  color: #f6fff9;
+}
+
 .spotify-embed-card {
   display: grid;
   gap: 0.7rem;

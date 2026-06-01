@@ -131,12 +131,16 @@ const notesContent = {
 
 const spotifyPlaylists = [
   {
-    id: "movie-night-mix",
-    title: "Spotify Playlist",
-    subtitle: "Preview or open the real playlist.",
+    id: "beg-for-meg",
+    title: "Beg for Meg",
     openUrl: "https://open.spotify.com/playlist/22H35x1f0mInw6fzdVgqKb?utm_source=generator",
     embedUrl: "https://open.spotify.com/embed/playlist/22H35x1f0mInw6fzdVgqKb?utm_source=generator",
-    accent: "Twilight-coded",
+  },
+  {
+    id: "musicals",
+    title: "Musicals",
+    openUrl: "https://open.spotify.com/playlist/3ZdbViXLICX8oJObvKgtFQ?utm_source=generator",
+    embedUrl: "https://open.spotify.com/embed/playlist/3ZdbViXLICX8oJObvKgtFQ?utm_source=generator",
   },
 ];
 
@@ -147,7 +151,7 @@ const state = {
   settings: getSettings(),
   phoneView: "home",
   selectedNote: "grocery",
-  selectedPlaylist: "movie-night-mix",
+  selectedPlaylist: "beg-for-meg",
 };
 
 const MUSIC_LEVELS = {
@@ -253,31 +257,50 @@ function renderPhoneNote() {
 }
 
 function renderSpotifyPlaylist() {
-  spotifyPlaylist.innerHTML = spotifyPlaylists
-    .map((playlist) => {
-      const isActive = playlist.id === state.selectedPlaylist;
-      return `
-        <section class="spotify-embed-card${isActive ? " spotify-embed-card-active" : ""}">
-          <div class="spotify-embed-shell ${isActive ? "" : "hidden"}" data-spotify-embed-shell="${playlist.id}">
-            <iframe
-              class="spotify-embed-frame"
-              title="${playlist.title}"
-              src="${playlist.embedUrl}"
-              width="100%"
-              height="352"
-              frameborder="0"
-              allowfullscreen=""
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-            ></iframe>
-          </div>
-          <a class="spotify-open-link" href="${playlist.openUrl}" target="_blank" rel="noopener noreferrer">
-            Open in Spotify
-          </a>
-        </section>
-      `;
-    })
+  const tabsMarkup = spotifyPlaylists
+    .map((playlist) => `
+      <button
+        type="button"
+        class="spotify-playlist-tab${playlist.id === state.selectedPlaylist ? " spotify-playlist-tab-active" : ""}"
+        data-spotify-playlist="${playlist.id}"
+      >
+        ${playlist.title}
+      </button>
+    `)
     .join("");
+
+  const activePlaylist = spotifyPlaylists.find((playlist) => playlist.id === state.selectedPlaylist) ?? spotifyPlaylists[0];
+
+  spotifyPlaylist.innerHTML = `
+    <div class="spotify-playlist-tabs" role="tablist" aria-label="Spotify playlists">
+      ${tabsMarkup}
+    </div>
+    <section class="spotify-embed-card spotify-embed-card-active">
+      <div class="spotify-embed-shell">
+        <iframe
+          class="spotify-embed-frame"
+          title="${activePlaylist.title}"
+          src="${activePlaylist.embedUrl}"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <a class="spotify-open-link" href="${activePlaylist.openUrl}" target="_blank" rel="noopener noreferrer">
+        Open in Spotify
+      </a>
+    </section>
+  `;
+
+  spotifyPlaylist.querySelectorAll("[data-spotify-playlist]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.selectedPlaylist = button.dataset.spotifyPlaylist;
+      renderSpotifyPlaylist();
+    });
+  });
 }
 
 function renderPhoneView() {
