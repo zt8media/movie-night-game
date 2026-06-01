@@ -1537,7 +1537,7 @@ button {
   position: fixed;
   right: var(--safe-right);
   bottom: var(--safe-bottom);
-  z-index: 3;
+  z-index: 30;
   width: 4.9rem;
   height: 5.9rem;
   padding: 0;
@@ -1579,7 +1579,7 @@ button {
 .settings-panel {
   position: fixed;
   inset: 0;
-  z-index: 4;
+  z-index: 40;
   display: grid;
   place-items: center;
   padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
@@ -1587,6 +1587,8 @@ button {
 }
 
 .phone-popup {
+  position: relative;
+  z-index: 41;
   width: min(96vw, 28rem);
   height: min(92svh, 52rem);
   display: grid;
