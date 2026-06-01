@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#33213d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Movie Night">
   <title>Movie Night</title>
+  <link rel="icon" type="image/png" href="assets/cat/cat_happy.png">
+  <link rel="apple-touch-icon" href="assets/cat/cat_happy.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -72,6 +78,10 @@
                   <span class="phone-app-icon">♫</span>
                   <span class="phone-app-label">Playlist</span>
                 </button>
+                <button id="webtoon-open-button" class="phone-app-button phone-app-webtoon" type="button">
+                  <span class="phone-app-icon">📚</span>
+                  <span class="phone-app-label">WEBTOON</span>
+                </button>
               </div>
             </div>
 
@@ -84,21 +94,41 @@
                 <div class="phone-body notes-phone-body">
                   <aside class="notes-sidebar">
                     <button type="button" data-phone-note="grocery">
-                      <strong>Grocery List</strong>
-                      <span>Dinner supplies and snacks</span>
+                      <span class="notes-note-icon" aria-hidden="true">🛒</span>
+                      <span class="notes-note-copy">
+                        <strong>Grocery List</strong>
+                        <span>Dinner supplies and snacks</span>
+                      </span>
                     </button>
                     <button type="button" data-phone-note="movies">
-                      <strong>Movies To Watch</strong>
-                      <span>A very opinionated queue</span>
+                      <span class="notes-note-icon" aria-hidden="true">🎬</span>
+                      <span class="notes-note-copy">
+                        <strong>Movies To Watch</strong>
+                        <span>A very opinionated queue</span>
+                      </span>
                     </button>
                     <button type="button" data-phone-note="passwords">
-                      <strong>Passwords</strong>
-                      <span>Absolutely secure, surely</span>
+                      <span class="notes-note-icon" aria-hidden="true">🔐</span>
+                      <span class="notes-note-copy">
+                        <strong>Passwords</strong>
+                        <span>Absolutely secure, surely</span>
+                      </span>
+                    </button>
+                    <button type="button" data-phone-note="todo">
+                      <span class="notes-note-icon" aria-hidden="true">✅</span>
+                      <span class="notes-note-copy">
+                        <strong>To Do List</strong>
+                        <span>To do list</span>
+                      </span>
                     </button>
                   </aside>
                   <article class="note-detail">
                     <div class="note-paper">
-                      <div id="phone-note-content"></div>
+                      <div class="note-paper-topper">
+                        <p id="phone-note-paper-title" class="note-paper-title">Grocery List</p>
+                        <p id="phone-note-meta" class="note-paper-meta">16 items</p>
+                      </div>
+                      <div id="phone-note-content" class="note-paper-content"></div>
                     </div>
                   </article>
                 </div>
@@ -107,13 +137,24 @@
 
             <div id="phone-spotify-view" class="phone-view hidden">
               <div class="spotify-panel">
-                <div class="spotify-header">
-                  <p class="panel-label">Playlist</p>
-                  <h3>Movie Night Mix</h3>
-                  <p>songs for making it back to the couch</p>
+                <div id="spotify-playlist" class="spotify-playlist"></div>
+              </div>
+            </div>
+
+            <div id="phone-webtoon-view" class="phone-view hidden">
+              <div class="webtoon-panel">
+                <div class="webtoon-header">
+                  <p class="panel-label">WEBTOON</p>
+                  <h3>Series List</h3>
+                  <p>Tap a series to open it.</p>
                 </div>
-                <div class="spotify-now-playing" id="spotify-now-playing">Now pretending to play: nothing yet</div>
-                <ol id="spotify-playlist" class="spotify-playlist"></ol>
+                <div class="webtoon-list">
+                  <a class="webtoon-series-card" href="https://www.webtoons.com/en/fantasy/osora/list?title_no=6202" target="_blank" rel="noopener noreferrer">
+                    <span class="webtoon-series-badge">Fantasy</span>
+                    <strong>Osora</strong>
+                    <span>Open on WEBTOON</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -133,6 +174,8 @@
         </div>
         <h2>Movie Night is best experienced in landscape mode.</h2>
         <p>Please rotate your device.</p>
+        <p>Add Movie Night to your home screen for the best results.</p>
+        <p>Press Full for fullscreen instructions if you need help.</p>
       </div>
     </section>
   </div>

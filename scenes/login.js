@@ -10,9 +10,9 @@ const storyDialogue = [
   { speaker: "TV", text: "Session expired. Please sign in." },
   { speaker: "Owner", text: "…" },
   { speaker: "Owner", text: "Of course." },
-  { speaker: "Cat", text: "…" },
+  { speaker: "Cat", text: "<em>ear twitch.</em>" },
   { speaker: "Owner", text: "I think the password is in my notes." },
-  { speaker: "Cat", text: "That sounds safe." },
+  { speaker: "Cat", text: "<em>prrp.</em> That sounds extremely secure." },
 ];
 
 function createDefaultLoginState() {
@@ -21,6 +21,8 @@ function createDefaultLoginState() {
     storyComplete: false,
     gameplayStarted: false,
     enteredPassword: "",
+    wrongAttempts: 0,
+    hintOpen: false,
     loginComplete: false,
     continueTeaseSeen: false,
     activeMessage: {
@@ -78,6 +80,7 @@ function renderStoryMode(state) {
 
 function renderGameplayMode(state) {
   const continueUnlocked = state.loginComplete;
+  const hintUnlocked = state.wrongAttempts > 0;
 
   return `
     <div class="login-scene-stage">
@@ -86,12 +89,15 @@ function renderGameplayMode(state) {
           <div class="tv-screen">
             <p class="tv-brand">STREAMBOX+</p>
             <h2>Sign In</h2>
-            <p class="tv-helper">${state.loginComplete ? "Streaming unlocked." : "Use the phone Notes app if you need the password."}</p>
+            <label class="tv-label" for="streaming-username">Username</label>
+            <input id="streaming-username" class="tv-password-input tv-username-input" type="text" value="ImAnAsshole@yahoo.com" disabled>
             <label class="tv-label" for="streaming-password">Password</label>
             <input id="streaming-password" class="tv-password-input" type="password" value="${state.enteredPassword}" placeholder="Enter password" ${state.loginComplete ? "disabled" : ""}>
             <div class="tv-actions">
               <button type="button" data-login-action="submit-password" ${state.loginComplete ? "disabled" : ""}>Submit</button>
+              <button type="button" class="tv-hint-button" data-login-action="toggle-hint" ${!hintUnlocked || state.loginComplete ? "disabled" : ""}>Hint</button>
             </div>
+            ${state.hintOpen && hintUnlocked && !state.loginComplete ? `<p class="tv-hint-tooltip">Check notes.</p>` : ""}
           </div>
         </section>
       </div>
@@ -162,8 +168,17 @@ export function createLoginScene() {
 
           if (action === "start-sign-in") {
             state.gameplayStarted = true;
+            state.hintOpen = false;
             setMessage(state, "Owner", "All right. Password time.");
             saveAndRender();
+            return;
+          }
+
+          if (action === "toggle-hint") {
+            if (state.wrongAttempts > 0 && !state.loginComplete) {
+              state.hintOpen = !state.hintOpen;
+              saveAndRender();
+            }
             return;
           }
 
@@ -172,16 +187,19 @@ export function createLoginScene() {
             const runToken = messageRunToken;
             const entered = state.enteredPassword.trim();
             if (entered !== correctPassword) {
+              state.wrongAttempts += 1;
+              state.hintOpen = false;
               setMessage(state, "TV", "Incorrect password.");
               persistLoginState(state);
               renderScene();
               setTimeout(() => {
-                applyMessageIfCurrent(runToken, "Owner", "Nope.");
+                applyMessageIfCurrent(runToken, "Owner", "Nope. That was not it.");
               }, 400);
               return;
             }
 
             state.loginComplete = true;
+            state.hintOpen = false;
             state.activeMessage = { speaker: "TV", text: "Welcome back." };
             persistLoginState(state);
             renderScene();
@@ -190,7 +208,7 @@ export function createLoginScene() {
                 applyMessageIfCurrent(runToken, "Owner", "There we go.");
                 setTimeout(() => {
                   if (state.loginComplete && runToken === messageRunToken && isLoginSceneActive()) {
-                    applyMessageIfCurrent(runToken, "Cat", "Maybe that helped.");
+                    applyMessageIfCurrent(runToken, "Cat", "<em>purr.</em> See? I was involved in a helpful way.");
                   }
                 }, 450);
               }

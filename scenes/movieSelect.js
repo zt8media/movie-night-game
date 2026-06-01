@@ -3,13 +3,13 @@ import { getSceneState, saveSceneState } from "../save/saveManager.js";
 const introDialogue = [
   { speaker: "Owner", text: "Okay." },
   { speaker: "Owner", text: "Now we can finally pick a movie." },
-  { speaker: "Cat", text: "Please let this be the easy part." },
+  { speaker: "Cat", text: "<em>hopeful purr.</em> Please let this be the easy part." },
 ];
 
 const twilightDialogue = [
   { speaker: "TV", text: "Playing Twilight." },
   { speaker: "Owner", text: "Finally." },
-  { speaker: "Cat", text: "Movie night made it." },
+  { speaker: "Cat", text: "<em>prrrr.</em> Movie night made it." },
 ];
 
 function createDefaultMovieSelectState() {

@@ -35,21 +35,20 @@ function createDefaultKitchenState() {
 const storyDialogue = [
   { speaker: "Owner", text: "Okay." },
   { speaker: "Owner", text: "Dinner first." },
-  { speaker: "Owner", text: "Then movie night." },
-  { speaker: "Cat", text: "I can help." },
-  { speaker: "Owner", text: "Please don’t." },
-  { speaker: "Cat", text: "…" },
-  { speaker: "Cat", text: "I am choosing to hear that as encouragement." },
+  { speaker: "Owner", text: "Then we can have movie night." },
+  { speaker: "Cat", text: "<em>prrrp.</em> I can help." },
+  { speaker: "Owner", text: "That is exactly what I am worried about." },
+  { speaker: "Cat", text: "<em>slow blink.</em> I am choosing to hear that as encouragement." },
 ];
 
 const postSpillDialogue = [
   { speaker: "Owner", text: "Seriously?" },
-  { speaker: "Cat", text: "…" },
+  { speaker: "Cat", text: "<em>mrrp.</em> That feels like a harsh tone for an accident." },
 ];
 
 const finalDialogue = [
   { speaker: "Owner", text: "Okay." },
-  { speaker: "Owner", text: "Dinner saved." },
+  { speaker: "Owner", text: "Dinner saved. Against the odds." },
 ];
 
 function kitchenState() {
@@ -94,7 +93,7 @@ function advanceDialogue(state, sequenceName) {
       state.activeMessage = postSpillDialogue[state.postSpillIndex];
     } else {
       state.postSpillComplete = true;
-      setMessage(state, "Cat", "I should probably clean that up.");
+      setMessage(state, "Cat", "<em>mrrrow.</em> I should probably clean that up.");
     }
     return;
   }
@@ -105,7 +104,7 @@ function advanceDialogue(state, sequenceName) {
       state.activeMessage = finalDialogue[state.finalIndex];
     } else {
       state.finalComplete = true;
-      setMessage(state, "Cat", "Scene 1 complete. Continue when ready.");
+      setMessage(state, "Cat", "<em>prrt.</em> I helped. Eventually.");
     }
   }
 }
@@ -411,7 +410,7 @@ export function createKitchenScene() {
         if (allSpillSpotsCleaned(state)) {
           state.spillCleaned = true;
           state.spongeReady = false;
-          setMessage(state, "Cat", "Clean enough to deny responsibility.");
+          setMessage(state, "Cat", "<em>mlep.</em> Clean enough to deny responsibility.");
           maybeStartFinalDialogue(state);
           saveAndRender();
           return;
@@ -438,17 +437,17 @@ export function createKitchenScene() {
               messageRunToken += 1;
               const runToken = messageRunToken;
               state.recipeOpen = false;
-              setMessage(state, "Owner", "We should probably eat something.");
+              setMessage(state, "Owner", "We should probably eat something more substantial than optimism.");
               saveAndRender();
               setTimeout(() => {
-                applyMessageIfCurrent(runToken, "Cat", "That was worth a shot.");
+                applyMessageIfCurrent(runToken, "Cat", "<em>prrp.</em> That was worth a shot.");
               }, 350);
               return;
             }
 
             if (button.dataset.choice === "spaghetti") {
               state.recipeOpen = true;
-              setMessage(state, "Owner", "All right. Let’s make the Regretti Spaghetti.");
+              setMessage(state, "Owner", "All right. Regretti Spaghetti it is.");
               saveAndRender();
             }
             return;
@@ -463,7 +462,7 @@ export function createKitchenScene() {
 
           if (action === "start-cooking") {
             state.gameplayStarted = true;
-            setMessage(state, "Cat", "Time to inspect the kitchen.");
+            setMessage(state, "Cat", "<em>sniff sniff.</em> Time to inspect the kitchen.");
             saveAndRender();
             return;
           }
@@ -471,13 +470,13 @@ export function createKitchenScene() {
           if (action === "ingredient") {
             const item = button.dataset.item;
             if (item === "pasta") {
-              markIngredient(state, "pasta", "Cat", "Pasta located. I am carrying this kitchen.");
+              markIngredient(state, "pasta", "Cat", "<em>prrt.</em> Pasta located. I am carrying this kitchen.");
             } else if (item === "cheese") {
-              markIngredient(state, "cheese", "Owner", "Cheese. Good. One useful thing at a time.");
+              markIngredient(state, "cheese", "Owner", "Cheese. Good. One competent employee at a time.");
             } else if (item === "garlic") {
-              markIngredient(state, "garlic", "Cat", "Garlic found. I smell important.");
+              markIngredient(state, "garlic", "Cat", "<em>snff.</em> Garlic found. I smell essential.");
             } else if (item === "sauce") {
-              const newlyFound = markIngredient(state, "sauce", "Cat", "Sauce secured. Probably.");
+              const newlyFound = markIngredient(state, "sauce", "Cat", "<em>mrrp.</em> Sauce secured. Probably.");
               if (newlyFound && !state.spillTriggered) {
                 state.spillTriggered = true;
                 state.postSpillIndex = 0;
@@ -506,7 +505,7 @@ export function createKitchenScene() {
               saveAndRender();
             } else if (state.spillTriggered && !state.spillCleaned) {
               state.spongeReady = true;
-              setMessage(state, "Cat", "Okay. Sponge acquired.");
+              setMessage(state, "Cat", "<em>prrp.</em> Sponge acquired.");
               saveAndRender();
             }
             return;

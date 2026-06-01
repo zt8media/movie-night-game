@@ -6,28 +6,27 @@ const storyDialogue = [
   { speaker: "Owner", text: "Now we just need the remote." },
   { speaker: "Owner", text: "…" },
   { speaker: "Owner", text: "Where is the remote?" },
-  { speaker: "Cat", text: "…" },
-  { speaker: "Cat", text: "I might know something." },
+  { speaker: "Cat", text: "<em>tail flick.</em> I might know something." },
   { speaker: "Owner", text: "What does that mean?" },
-  { speaker: "Cat", text: "Nothing." },
-  { speaker: "Cat", text: "Probably." },
+  { speaker: "Cat", text: "<em>innocent purr.</em> Nothing." },
+  { speaker: "Cat", text: "<em>tiny meow.</em> Probably." },
 ];
 
 const finalDialogue = [
   { speaker: "Owner", text: "There it is." },
   { speaker: "Owner", text: "How did it even get there?" },
-  { speaker: "Cat", text: "…" },
-  { speaker: "Cat", text: "I have no comment." },
+  { speaker: "Cat", text: "<em>blank stare.</em>" },
+  { speaker: "Cat", text: "<em>prrr.</em> I have no comment." },
 ];
 
 const clueMessages = {
-  bookshelf: "No remote here. Just very judgmental novels.",
-  blanket: "Just a suspiciously rumpled blanket.",
-  wallArt: "Now why would it be over there?",
-  lamp: "Bright idea. No remote.",
-  rug: "Something was definitely dragged across here.",
-  catBed: "Suspiciously warm.",
-  table: "No remote. Just evidence of dinner.",
+  bookshelf: "<em>sniff.</em> No remote here. Just very judgmental novels.",
+  blanket: "<em>paw pat.</em> Just a suspiciously rumpled blanket.",
+  wallArt: "<em>mrrp.</em> Now why would it be over there?",
+  lamp: "<em>blink.</em> Bright idea. No remote.",
+  rug: "<em>snff.</em> Rug-rettable. Still no remote.",
+  catBed: "Just a cute little anxious cat here.",
+  table: "<em>tiny gasp.</em> Tabled for later, apparently. Still no remote.",
 };
 
 const clueLabels = {
@@ -232,7 +231,7 @@ export function createRemoteScene() {
 
           if (action === "start-search") {
             state.gameplayStarted = true;
-            setMessage(state, "Owner", "Check every spot. The remote is in here somewhere.");
+            setMessage(state, "Owner", "Check every spot. The remote is in here somewhere, and I do not trust the cat about it.");
             saveAndRender();
             return;
           }

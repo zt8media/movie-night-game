@@ -27,14 +27,17 @@ const muteButton = document.querySelector("#mute-button");
 const resetSaveButton = document.querySelector("#reset-save-button");
 const notesOpenButton = document.querySelector("#notes-open-button");
 const spotifyOpenButton = document.querySelector("#spotify-open-button");
+const webtoonOpenButton = document.querySelector("#webtoon-open-button");
 const phoneBackButton = document.querySelector("#phone-back-button");
 const phoneTitle = document.querySelector("#phone-title");
 const phoneHomeView = document.querySelector("#phone-home-view");
 const phoneNotesView = document.querySelector("#phone-notes-view");
 const phoneSpotifyView = document.querySelector("#phone-spotify-view");
+const phoneWebtoonView = document.querySelector("#phone-webtoon-view");
 const phoneNoteTitle = document.querySelector("#phone-note-title");
+const phoneNotePaperTitle = document.querySelector("#phone-note-paper-title");
+const phoneNoteMeta = document.querySelector("#phone-note-meta");
 const phoneNoteContent = document.querySelector("#phone-note-content");
-const spotifyNowPlaying = document.querySelector("#spotify-now-playing");
 const spotifyPlaylist = document.querySelector("#spotify-playlist");
 const orientationOverlay = document.querySelector("#orientation-overlay");
 const bgMusic = document.querySelector("#bg-music");
@@ -107,19 +110,34 @@ const notesContent = {
       "WiFi — askTheCat",
     ],
   },
+  todo: {
+    title: "To Do List",
+    items: [
+      "Play Tomodachi Life",
+      "Catch up on Green Yuri",
+      "Re-read Osora",
+      "Forgive Zari",
+      "Oil change",
+      "Trip to Chicago",
+      "Book workout class",
+      "Get grills",
+      "Make matcha",
+      "Fold laundry",
+      "Charge headphones",
+      "Figure out dinner that is not emotionally loaded",
+    ],
+  },
 };
 
-const spotifySongs = [
-  "Decode — Paramore",
-  "Supermassive Black Hole — Muse",
-  "Flightless Bird, American Mouth — Iron & Wine",
-  "Roslyn — Bon Iver & St. Vincent",
-  "Sea of Love — Cat Power",
-  "First Love/Late Spring — Mitski",
-  "Pink in the Night — Mitski",
-  "Space Song — Beach House",
-  "Sweet — Cigarettes After Sex",
-  "My Love Mine All Mine — Mitski",
+const spotifyPlaylists = [
+  {
+    id: "movie-night-mix",
+    title: "Spotify Playlist",
+    subtitle: "Preview or open the real playlist.",
+    openUrl: "https://open.spotify.com/playlist/22H35x1f0mInw6fzdVgqKb?utm_source=generator",
+    embedUrl: "https://open.spotify.com/embed/playlist/22H35x1f0mInw6fzdVgqKb?utm_source=generator",
+    accent: "Twilight-coded",
+  },
 ];
 
 const state = {
@@ -129,7 +147,7 @@ const state = {
   settings: getSettings(),
   phoneView: "home",
   selectedNote: "grocery",
-  selectedSong: "",
+  selectedPlaylist: "movie-night-mix",
 };
 
 const MUSIC_LEVELS = {
@@ -210,6 +228,9 @@ function syncMusicState() {
 function renderPhoneNote() {
   const note = notesContent[state.selectedNote];
   phoneNoteTitle.textContent = note.title;
+  phoneNotePaperTitle.textContent = note.title;
+  phoneNoteMeta.textContent = `${note.items.length} ${note.items.length === 1 ? "entry" : "entries"}`;
+  phoneNoteContent.className = `note-paper-content note-paper-content-${state.selectedNote}`;
 
   document.querySelectorAll("[data-phone-note]").forEach((button) => {
     button.classList.toggle("notes-note-active", button.dataset.phoneNote === state.selectedNote);
@@ -232,39 +253,43 @@ function renderPhoneNote() {
 }
 
 function renderSpotifyPlaylist() {
-  spotifyPlaylist.innerHTML = spotifySongs
-    .map(
-      (song, index) => `
-        <li>
-          <button type="button" class="spotify-track-button" data-spotify-song="${song}">
-            <span class="spotify-track-number">${index + 1}.</span>
-            <span>${song}</span>
-          </button>
-        </li>
-      `,
-    )
+  spotifyPlaylist.innerHTML = spotifyPlaylists
+    .map((playlist) => {
+      const isActive = playlist.id === state.selectedPlaylist;
+      return `
+        <section class="spotify-embed-card${isActive ? " spotify-embed-card-active" : ""}">
+          <div class="spotify-embed-shell ${isActive ? "" : "hidden"}" data-spotify-embed-shell="${playlist.id}">
+            <iframe
+              class="spotify-embed-frame"
+              title="${playlist.title}"
+              src="${playlist.embedUrl}"
+              width="100%"
+              height="352"
+              frameborder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <a class="spotify-open-link" href="${playlist.openUrl}" target="_blank" rel="noopener noreferrer">
+            Open in Spotify
+          </a>
+        </section>
+      `;
+    })
     .join("");
-
-  spotifyNowPlaying.textContent = state.selectedSong
-    ? `Now pretending to play: ${state.selectedSong}`
-    : "Now pretending to play: nothing yet";
-
-  spotifyPlaylist.querySelectorAll("[data-spotify-song]").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.selectedSong = button.dataset.spotifySong;
-      spotifyNowPlaying.textContent = `Now pretending to play: ${state.selectedSong}`;
-    });
-  });
 }
 
 function renderPhoneView() {
   const notesMode = state.phoneView === "notes";
   const spotifyMode = state.phoneView === "spotify";
-  phoneHomeView.classList.toggle("hidden", notesMode || spotifyMode);
+  const webtoonMode = state.phoneView === "webtoon";
+  phoneHomeView.classList.toggle("hidden", notesMode || spotifyMode || webtoonMode);
   phoneNotesView.classList.toggle("hidden", !notesMode);
   phoneSpotifyView.classList.toggle("hidden", !spotifyMode);
-  phoneBackButton.classList.toggle("hidden", !(notesMode || spotifyMode));
-  phoneTitle.textContent = notesMode ? "Notes" : spotifyMode ? "Spotify" : "Phone";
+  phoneWebtoonView.classList.toggle("hidden", !webtoonMode);
+  phoneBackButton.classList.toggle("hidden", !(notesMode || spotifyMode || webtoonMode));
+  phoneTitle.textContent = notesMode ? "Notes" : spotifyMode ? "Spotify" : webtoonMode ? "WEBTOON" : "Phone";
 
   if (notesMode) {
     renderPhoneNote();
@@ -500,6 +525,10 @@ notesOpenButton.addEventListener("click", () => {
 });
 spotifyOpenButton.addEventListener("click", () => {
   state.phoneView = "spotify";
+  renderPhoneView();
+});
+webtoonOpenButton.addEventListener("click", () => {
+  state.phoneView = "webtoon";
   renderPhoneView();
 });
 phoneBackButton.addEventListener("click", () => {

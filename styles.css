@@ -73,7 +73,7 @@
   --remote-hotspot-wall-art-top-iphone: -68%;
   --remote-hotspot-wall-art-left-iphone: 110%;
   --remote-hotspot-lamp-top-iphone: 40%;
-  --remote-hotspot-lamp-left-iphone: 186%;
+  --remote-hotspot-lamp-left-iphone: 215%;
   --remote-hotspot-rug-left-iphone: 152%;
   --remote-hotspot-rug-bottom-iphone: -10%;
   --remote-hotspot-cat-bed-left-iphone: 7%;
@@ -1126,6 +1126,12 @@ button {
   overflow-wrap: anywhere;
 }
 
+.dialogue-text em {
+  font-style: italic;
+  color: #ffdca5;
+  letter-spacing: 0.01em;
+}
+
 .dialogue-controls {
   display: flex;
   flex-wrap: wrap;
@@ -1411,6 +1417,11 @@ button {
   font: inherit;
 }
 
+.tv-username-input {
+  color: rgba(255, 248, 246, 0.82);
+  background: rgba(255, 245, 246, 0.06);
+}
+
 .tv-actions,
 .phone-header,
 .phone-body {
@@ -1421,6 +1432,28 @@ button {
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.75rem;
+}
+
+.tv-hint-button {
+  background: rgba(188, 55, 72, 0.88) !important;
+  border-color: rgba(255, 202, 210, 0.32) !important;
+}
+
+.tv-hint-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.tv-hint-tooltip {
+  margin: -0.1rem auto 0;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 231, 173, 0.14);
+  border: 1px solid rgba(255, 220, 133, 0.24);
+  color: #ffeab9;
+  font-size: 0.82rem;
 }
 
 .tv-actions button,
@@ -1778,6 +1811,10 @@ button {
   background: linear-gradient(180deg, #d7d0ff, #b9afff);
 }
 
+.phone-app-webtoon .phone-app-icon {
+  background: linear-gradient(180deg, #c8f0d7, #8edca8);
+}
+
 .notes-app-shell {
   height: 100%;
   display: grid;
@@ -1811,16 +1848,21 @@ button {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   gap: 0.8rem;
-  border: 1px solid rgba(144, 118, 11, 0.18);
-  border-radius: 1.35rem;
+  border: 1px solid rgba(144, 118, 11, 0.16);
+  border-radius: 1.5rem;
   overflow: hidden;
-  background: linear-gradient(180deg, #fff7c8, #f9efb0);
-  padding: 0.9rem;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.45), transparent 28%),
+    linear-gradient(180deg, #fff7cf, #f5e39d);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    0 10px 22px rgba(130, 107, 11, 0.1);
+  padding: 0.95rem;
 }
 
 .notes-sidebar {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.72rem;
   padding: 0;
   background: transparent;
   border-right: 0;
@@ -1829,26 +1871,55 @@ button {
 
 .notes-sidebar button {
   display: grid;
-  gap: 0.22rem;
-  padding: 0.95rem 1rem;
-  border: 1px solid rgba(144, 118, 11, 0.1);
-  border-radius: 1rem;
-  background: rgba(255, 253, 242, 0.78);
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.72rem;
+  padding: 0.98rem 1rem;
+  border: 1px solid rgba(144, 118, 11, 0.12);
+  border-radius: 1.1rem;
+  background: rgba(255, 252, 244, 0.85);
   color: #4a3c05;
   text-align: left;
   box-shadow:
-    0 8px 16px rgba(130, 107, 11, 0.08),
+    0 10px 18px rgba(130, 107, 11, 0.09),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+
+.notes-sidebar button:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 20px rgba(130, 107, 11, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .notes-note-active {
-  background: linear-gradient(180deg, #fff8cf, #fff0a8) !important;
-  border-color: rgba(181, 146, 18, 0.24) !important;
+  background: linear-gradient(180deg, #fff9d8, #ffeaa0) !important;
+  border-color: rgba(181, 146, 18, 0.3) !important;
   transform: translateY(-1px);
 }
 
+.notes-note-icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.95rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 238, 184, 0.95));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 8px 12px rgba(130, 107, 11, 0.08);
+  font-size: 1.15rem;
+}
+
+.notes-note-copy {
+  min-width: 0;
+  display: grid;
+  gap: 0.22rem;
+}
+
 .notes-sidebar button strong {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
 }
 
 .notes-sidebar button span {
@@ -1866,13 +1937,72 @@ button {
 
 .note-paper {
   min-height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
   padding: 1.15rem 1.1rem 1.3rem;
-  border-radius: 1.15rem;
+  border-radius: 1.25rem;
   background:
-    linear-gradient(180deg, rgba(255, 253, 240, 0.96), rgba(255, 248, 219, 0.96));
+    linear-gradient(180deg, rgba(255, 255, 249, 0.98), rgba(255, 248, 219, 0.98));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.75),
-    0 10px 18px rgba(130, 107, 11, 0.08);
+    0 12px 22px rgba(130, 107, 11, 0.1);
+  position: relative;
+}
+
+.note-paper::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 1.1rem;
+  width: 2px;
+  background: rgba(227, 143, 152, 0.35);
+  border-radius: 999px;
+}
+
+.note-paper::after {
+  content: "";
+  position: absolute;
+  inset: 4.1rem 0 0;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 1.75rem,
+      rgba(120, 160, 214, 0.18) 1.75rem,
+      rgba(120, 160, 214, 0.18) 1.83rem
+    );
+  pointer-events: none;
+}
+
+.note-paper-topper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0.75rem;
+  padding: 0 0 0.4rem 1rem;
+  border-bottom: 1px solid rgba(201, 176, 90, 0.25);
+}
+
+.note-paper-title {
+  margin: 0;
+  font-size: 1.06rem;
+  color: #433204;
+}
+
+.note-paper-meta {
+  margin: 0.18rem 0 0;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #91761c;
+}
+
+.note-paper-content {
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  padding: 0.1rem 0.25rem 0 1.35rem;
 }
 
 .note-listing {
@@ -1880,20 +2010,26 @@ button {
   padding-left: 1.15rem;
   display: grid;
   gap: 0.92rem;
-  line-height: 1.55;
+  line-height: 1.62;
 }
 
 .password-note-scroll {
   max-height: none;
   overflow: auto;
-  padding-right: 0.45rem;
+  padding-right: 0.5rem;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
 
 .password-note-scroll p {
-  margin: 0 0 0.78rem;
-  line-height: 1.56;
+  margin: 0 0 0.95rem;
+  line-height: 1.6;
+}
+
+.note-paper-content-passwords .password-note-scroll p {
+  padding: 0.12rem 0.45rem;
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.36);
 }
 
 .spotify-panel {
@@ -1909,71 +2045,128 @@ button {
   color: #f6fff9;
 }
 
-.spotify-header h3 {
-  margin: 0.18rem 0 0.28rem;
-  font-size: 1.34rem;
-}
-
-.spotify-header p:last-child {
-  margin: 0;
-  color: rgba(246, 255, 249, 0.76);
-}
-
-.spotify-now-playing {
-  padding: 0.85rem 0.95rem;
-  border: 1px solid rgba(111, 227, 142, 0.22);
-  border-radius: 1rem;
-  background: rgba(111, 227, 142, 0.1);
-  color: #dfffe8;
-}
-
 .spotify-playlist {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding: 0 0.1rem 0 0;
   display: grid;
-  gap: 0.62rem;
+  gap: 0.85rem;
   overflow: auto;
   min-height: 0;
-  padding-right: 0.1rem;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
 
-.spotify-track-button {
-  width: 100%;
+.spotify-embed-card {
   display: grid;
-  grid-template-columns: auto auto 1fr;
-  gap: 0.75rem;
-  align-items: center;
-  padding: 0.9rem 0.95rem;
-  border: 1px solid rgba(111, 227, 142, 0.15);
-  border-radius: 1rem;
+  gap: 0.7rem;
+  padding: 0.9rem;
+  border-radius: 1.15rem;
   background: rgba(255, 255, 255, 0.05);
-  color: #f6fff9;
-  cursor: pointer;
-  text-align: left;
+  border: 1px solid rgba(111, 227, 142, 0.14);
 }
 
-.spotify-track-button::before {
-  content: "♪";
-  display: grid;
-  place-items: center;
-  width: 1.8rem;
-  height: 1.8rem;
-  border-radius: 999px;
-  background: rgba(111, 227, 142, 0.16);
-  color: #8ff1ac;
-  font-size: 0.95rem;
+.spotify-embed-card-active {
+  border-color: rgba(111, 227, 142, 0.32);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
 }
 
-.spotify-track-button:hover {
-  background: rgba(111, 227, 142, 0.12);
+.spotify-embed-shell {
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(111, 227, 142, 0.18);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.spotify-track-number {
-  color: #9eeab3;
+.spotify-embed-frame {
+  display: block;
+  border: 0;
+  border-radius: 12px;
+}
+
+.spotify-open-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.7rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.95rem;
+  background: rgba(111, 227, 142, 0.14);
+  border: 1px solid rgba(111, 227, 142, 0.2);
+  color: #ecfff1;
+  text-decoration: none;
   font-weight: 700;
+}
+
+.spotify-open-link:hover,
+.spotify-open-link:focus-visible {
+  background: rgba(111, 227, 142, 0.2);
+}
+
+.webtoon-panel {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.9rem;
+  padding: 1rem;
+  border-radius: 1.35rem;
+  background:
+    radial-gradient(circle at top left, rgba(160, 255, 198, 0.16), transparent 28%),
+    linear-gradient(180deg, #12221a 0%, #10241d 16%, #0e1613 100%);
+  color: #f1fff5;
+}
+
+.webtoon-header h3 {
+  margin: 0.18rem 0 0.28rem;
+  font-size: 1.34rem;
+}
+
+.webtoon-header p:last-child {
+  margin: 0;
+  color: rgba(241, 255, 245, 0.78);
+}
+
+.webtoon-list {
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+}
+
+.webtoon-series-card {
+  display: grid;
+  gap: 0.32rem;
+  padding: 1rem;
+  border-radius: 1.05rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(143, 231, 172, 0.18);
+  color: #effff3;
+  text-decoration: none;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.18);
+}
+
+.webtoon-series-card strong {
+  font-size: 1.06rem;
+}
+
+.webtoon-series-card span:last-child {
+  color: rgba(241, 255, 245, 0.78);
+}
+
+.webtoon-series-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(143, 231, 172, 0.14);
+  color: #bbffd0;
+  font-size: 0.67rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.webtoon-series-card:hover,
+.webtoon-series-card:focus-visible {
+  background: rgba(143, 231, 172, 0.22);
 }
 
 .phone-home-indicator {

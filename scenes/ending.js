@@ -4,17 +4,17 @@ const endingSequence = [
   { speaker: "Owner", text: "Well." },
   { speaker: "Owner", text: "We got here eventually." },
   { speaker: "Owner", text: "Even if it took a little longer than planned." },
-  { speaker: "Cat", text: "…" },
-  { speaker: "Cat", text: "I didn’t mean to make everything harder." },
+  { speaker: "Cat", text: "<em>small purr.</em>" },
+  { speaker: "Cat", text: "<em>mrrp.</em> I did not mean to make everything harder." },
   { speaker: "Owner", text: "I know." },
   { speaker: "Owner", text: "You were trying to help." },
-  { speaker: "Cat", text: "…" },
+  { speaker: "Cat", text: "<em>slow blink.</em>" },
   { speaker: "Owner", text: "I know that too." },
   { speaker: "pause", text: "Pause." },
   { speaker: "Owner", text: "Come here." },
   { speaker: "move", text: "Cat moves to center of couch." },
   { speaker: "pause", text: "Pause." },
-  { speaker: "Cat", text: "Okay." },
+  { speaker: "Cat", text: "<em>soft purr.</em> Okay." },
 ];
 
 const finalCards = [
@@ -112,8 +112,8 @@ export function createEndingScene() {
               ${state.cardsComplete ? `
                 <div class="credits-block">
                   <h2>Movie Night</h2>
-                  <p>Created by:<br>Player Name or Creator</p>
-                  <p>Special Thanks:<br>One very patient friend</p>
+                  <p>Created by:<br>Zari<br>Worked on it all weekend and used Canva to create the art.</p>
+                  <p>Special Thanks:<br>Jayla<br>I hope you like this expression of my remorse. I am very sorry again friend.</p>
                   <p>The End</p>
                 </div>
               ` : ""}
