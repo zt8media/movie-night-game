@@ -314,6 +314,69 @@ button {
   gap: 0.8rem;
 }
 
+.shutdown-home-scene {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.shutdown-warning-overlay {
+  width: min(92%, 44rem);
+  display: grid;
+  gap: 0.85rem;
+  padding: clamp(1.3rem, 4vw, 2.3rem);
+  border: 3px solid rgba(255, 42, 42, 0.9);
+  border-radius: 18px;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 42, 42, 0.18) 0,
+      rgba(255, 42, 42, 0.18) 12px,
+      rgba(255, 226, 91, 0.16) 12px,
+      rgba(255, 226, 91, 0.16) 24px
+    ),
+    rgba(24, 0, 0, 0.86);
+  color: #fff8f6;
+  text-align: center;
+  box-shadow:
+    0 0 0 7px rgba(255, 42, 42, 0.14),
+    0 20px 46px rgba(0, 0, 0, 0.42);
+  animation: shutdown-warning-flash 1.05s steps(2, end) infinite;
+}
+
+.shutdown-kicker {
+  margin: 0;
+  color: #ffe25b;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.shutdown-warning-overlay h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1;
+}
+
+.shutdown-warning-overlay p {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+  line-height: 1.35;
+}
+
+@keyframes shutdown-warning-flash {
+  0%,
+  100% {
+    border-color: rgba(255, 42, 42, 0.95);
+    filter: brightness(1);
+  }
+  50% {
+    border-color: rgba(255, 226, 91, 0.98);
+    filter: brightness(1.18);
+  }
+}
+
 .home-side-cat {
   position: absolute;
   right: var(--home-side-cat-right);
